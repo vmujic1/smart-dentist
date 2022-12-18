@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.util.Objects;
+
 public class Materijali {
 
     private int id;
@@ -37,5 +39,18 @@ public class Materijali {
 
     public void setKoličina(int količina) {
         this.količina = količina;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Materijali that = (Materijali) o;
+        return id == that.id && količina == that.količina && Objects.equals(naziv, that.naziv);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, naziv, količina);
     }
 }
