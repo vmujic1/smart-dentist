@@ -65,4 +65,14 @@ public class NarudzbePacijenata {
     public int hashCode() {
         return Objects.hash(ime, prezime, datum, povod);
     }
+
+    @Override
+    public String toString() {
+        return "NarudzbePacijenata{" +
+                "ime='" + ime + '\'' +
+                ", prezime='" + prezime + '\'' +
+                ", datum=" + datum +
+                ", povod='" + povod + '\'' +
+                '}';
+    }
 }
