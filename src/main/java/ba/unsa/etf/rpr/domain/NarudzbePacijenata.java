@@ -51,4 +51,5 @@ public class NarudzbePacijenata {
     public void setPovod(String povod) {
         this.povod = povod;
     }
+
 }

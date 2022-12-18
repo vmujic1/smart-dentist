@@ -53,4 +53,13 @@ public class Materijali {
     public int hashCode() {
         return Objects.hash(id, naziv, količina);
     }
+
+    @Override
+    public String toString() {
+        return "Materijali{" +
+                "id=" + id +
+                ", naziv='" + naziv + '\'' +
+                ", količina=" + količina +
+                '}';
+    }
 }
