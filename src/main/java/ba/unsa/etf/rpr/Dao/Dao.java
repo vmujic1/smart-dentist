@@ -1,4 +1,4 @@
 package ba.unsa.etf.rpr.Dao;
 
-public interface Dao {
+public interface Dao<T> {
 }
