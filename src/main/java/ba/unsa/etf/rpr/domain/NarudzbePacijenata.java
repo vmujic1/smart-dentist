@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.domain;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class NarudzbePacijenata {
 
@@ -52,4 +53,16 @@ public class NarudzbePacijenata {
         this.povod = povod;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NarudzbePacijenata that = (NarudzbePacijenata) o;
+        return Objects.equals(ime, that.ime) && Objects.equals(prezime, that.prezime) && Objects.equals(datum, that.datum) && Objects.equals(povod, that.povod);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ime, prezime, datum, povod);
+    }
 }
