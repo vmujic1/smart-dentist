@@ -1,10 +1,14 @@
 package ba.unsa.etf.rpr.controllers;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+
 
 public class LoginControler {
 
-    public void registrujSeAction(ActionEvent actionEvent){
 
+    public Button registrujSeID;
+
+    public void registrujSeAction(ActionEvent actionEvent) {
     }
 }
