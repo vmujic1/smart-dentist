@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #cccecb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.LoginControler">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #0d72a8;" GridPane.columnSpan="2" GridPane.rowSpan="3">
+         <children>
+            <Label alignment="CENTER" blendMode="SRC_ATOP" contentDisplay="CENTER" text="SmartDentist" textFill="WHITE">
+               <font>
+                  <Font name="Bell MT" size="28.0" />
+               </font>
+            </Label>
+            <Line endX="100.0" fill="WHITE" startX="-100.0" stroke="#ffffff2b" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeWidth="5.0">
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Line>
+            <ImageView fitHeight="150.0" fitWidth="200.0" opacity="0.44" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+               <image>
+                  <Image url="@../img/imgbin_human-tooth-dentistry-smile-png.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="BASELINE_CENTER" text="Copyright (c). All rights reserved." textFill="WHITE" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowSpan="3">
+         <children>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="BOTTOM_CENTER" text="Prijavi se!">
+                     <font>
+                        <Font name="Bell MT" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="18.0" fitWidth="25.0" pickOnBounds="true">
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../img/username-1-512.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="korisnickoImeID" promptText="Korisnicko ime">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="50.0" top="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <effect>
+                  <Glow />
+               </effect>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../img/password-76-512.png" />
+                     </image>
+                  </ImageView>
+                  <PasswordField promptText="Lozinka">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="50.0" top="10.0" />
+                     </HBox.margin>
+                  </PasswordField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="238.0" style="-fx-background-color: #0d72a8; -fx-border-radius: 200;" text="Prijavi se" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="105.0" prefWidth="322.0">
+               <children>
+                  <Button fx:id="registrujSeID" mnemonicParsing="false" onAction="#registrujSeAction" prefHeight="26.0" prefWidth="238.0" style="-fx-background-color: #0d72a8;" text="Registruj se" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</GridPane>
