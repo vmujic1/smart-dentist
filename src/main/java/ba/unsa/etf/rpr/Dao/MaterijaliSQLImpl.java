@@ -56,4 +56,9 @@ public class MaterijaliSQLImpl implements MaterijaliDao{
     public List<Materijali> searchByName(String ime) {
         return null;
     }
+
+    @Override
+    public List<Materijali> searchByKolicina(int kolicina) {
+        return null;
+    }
 }

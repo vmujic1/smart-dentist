@@ -15,5 +15,7 @@ public interface MaterijaliDao extends Dao<Materijali>{
      */
     List<Materijali> searchByName(String ime);
 
+    List<Materijali> searchByKolicina(int kolicina);
+
     
 }
