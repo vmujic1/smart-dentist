@@ -76,11 +76,41 @@ public class UserDaoSQLImpl implements UserDao{
 
     @Override
     public User searchByUsername(String text) {
-        return null;
+        String query = "SELECT * FROM user WHERE username LIKE concat('%',?,'%')";
+        try{
+
+        }
+
     }
 
     @Override
     public User searchByOrdinationUsername(String text) {
+        String query = "SELECT * FROM user WHERE imeOrdinacije LIKE concat('%', ?, '%')";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1,text);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setImeOrdinacije(rs.getString("ime_ordinacije"));
+                user.setUsername(rs.getString("username"));
+                user.setLozinka(rs.getString("lozinka"));
+                user.setBroj_zaposlenih(rs.getInt("broj_zaposlenih"));
+                user.setAdresa(rs.getString("adresa"));
+                user.setEmail(rs.getString("email"));
+                user.setKontakt_telefon(rs.getString("kontakt_telefon"));
+                user.setBroj_poslovnica(rs.getInt("broj_poslovnica"));
+                rs.close();
+                return user;
+
+            }
+
+
+
+            } catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 }
