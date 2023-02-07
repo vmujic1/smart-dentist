@@ -5,12 +5,15 @@ import java.util.Objects;
 
 public class NarudzbePacijenata {
 
+    private int id;
+
     private String ime;
     private String prezime;
     private Date datum;
     private String povod;
 
-    public NarudzbePacijenata(String ime, String prezime, Date datum, String povod) {
+    public NarudzbePacijenata(int id,String ime, String prezime, Date datum, String povod) {
+        this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.datum = datum;
@@ -21,6 +24,12 @@ public class NarudzbePacijenata {
 
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getIme() {
         return ime;
     }
