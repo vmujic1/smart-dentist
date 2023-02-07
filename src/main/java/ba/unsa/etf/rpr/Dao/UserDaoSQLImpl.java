@@ -4,9 +4,7 @@ import ba.unsa.etf.rpr.domain.User;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Properties;
 
@@ -26,7 +24,34 @@ public class UserDaoSQLImpl implements UserDao{
     }
     @Override
     public User getById(int id) {
-        return null;
+        String query = "SELECT * FROM user WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setImeOrdinacije(rs.getString("ime_ordinacije"));
+                user.setUsername(rs.getString("username"));
+                user.setLozinka(rs.getString("lozinka"));
+                user.setBroj_zaposlenih(rs.getInt("broj_zaposlenih"));
+                user.setAdresa(rs.getString("adresa"));
+                user.setEmail(rs.getString("email"));
+                user.setKontakt_telefon(rs.getString("kontakt_telefon"));
+                user.setBroj_poslovnica(rs.getInt("broj_poslovnica"));
+
+                rs.close();
+                return user;
+
+            }else{
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -46,6 +71,16 @@ public class UserDaoSQLImpl implements UserDao{
 
     @Override
     public List<User> getAll() {
+        return null;
+    }
+
+    @Override
+    public User searchByUsername(String text) {
+        return null;
+    }
+
+    @Override
+    public User searchByOrdinationUsername(String text) {
         return null;
     }
 }

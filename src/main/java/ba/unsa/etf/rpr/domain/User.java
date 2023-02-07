@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class User {
 
-    private int idUser;
+    private int id;
     private String imeOrdinacije;
     private String username;
     private String lozinka;
@@ -14,8 +14,8 @@ public class User {
     private String kontakt_telefon;
     private  int broj_poslovnica;
 
-    public User(int idUser, String imeOrdinacije, String username, String lozinka, int broj_zaposlenih, String adresa, String email, String kontakt_telefon, int broj_poslovnica) {
-        this.idUser = idUser;
+    public User(int id, String imeOrdinacije, String username, String lozinka, int broj_zaposlenih, String adresa, String email, String kontakt_telefon, int broj_poslovnica) {
+        this.id = id;
         this.imeOrdinacije = imeOrdinacije;
         this.username = username;
         this.lozinka = lozinka;
@@ -26,12 +26,12 @@ public class User {
         this.broj_poslovnica = broj_poslovnica;
     }
 
-    private User(){
+    public User(){
 
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getId() {
+        return id;
     }
 
     public String getImeOrdinacije() {
@@ -42,8 +42,8 @@ public class User {
         return lozinka;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setImeOrdinacije(String imeOrdinacije) {
@@ -107,18 +107,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user1 = (User) o;
-        return idUser == user1.idUser && Objects.equals(imeOrdinacije, user1.imeOrdinacije) && Objects.equals(username, user1.username) && Objects.equals(lozinka, user1.lozinka);
+        return id == user1.id && Objects.equals(imeOrdinacije, user1.imeOrdinacije) && Objects.equals(username, user1.username) && Objects.equals(lozinka, user1.lozinka);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUser, imeOrdinacije, username, lozinka);
+        return Objects.hash(id, imeOrdinacije, username, lozinka);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "idUser=" + idUser +
+                "id=" + id +
                 ", imeOrdinacije='" + imeOrdinacije + '\'' +
                 ", user='" + username + '\'' +
                 ", lozinka='" + lozinka + '\'' +

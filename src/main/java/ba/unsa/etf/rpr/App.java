@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.Dao.UserDaoSQLImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,8 @@ import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 public class App extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+        UserDaoSQLImpl user = new UserDaoSQLImpl();
+       
     }
     @Override
     public void start(Stage stage) throws Exception {
