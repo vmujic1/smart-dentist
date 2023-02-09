@@ -3,10 +3,7 @@ package ba.unsa.etf.rpr.Dao;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -72,6 +69,18 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
     public List<T> getAll() throws SmartDentistException{
         return executeQuerry("SELECT * FROM " + tableName, null);
+    }
+
+    public void delete(int id) throws SmartDentistException{
+        String query = "DELETE FROM " + tableName + " WHERE id = ?";
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1,id);
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new SmartDentistException(e.getMessage(),e);
+        }
+        
     }
 
 
