@@ -66,7 +66,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     }
 
     public List<T> getAll() throws SmartDentistException{
-        return executeQuerry("SELECT * FROM " + tableName, null);
+        return executeQuery("SELECT * FROM " + tableName, null);
     }
 
     public void delete(int id) throws SmartDentistException{
