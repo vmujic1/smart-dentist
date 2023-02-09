@@ -1,9 +1,11 @@
 package ba.unsa.etf.rpr.Dao;
 
 import ba.unsa.etf.rpr.domain.Idable;
+import ba.unsa.etf.rpr.exceptions.SmartDentinstException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -46,6 +48,14 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public static Connection getConnection(){
         return AbstractDao.connection;
     }
+
+    /**
+     * Method for mapping ResultSet into Object
+     * @param rs - result set from database
+     * @return a Bean object for specific table
+     * @throws SmartDentinstException in case of error with db
+     */
+    public abstract T row2object(ResultSet rs) throws SmartDentinstException;
 
 
 
