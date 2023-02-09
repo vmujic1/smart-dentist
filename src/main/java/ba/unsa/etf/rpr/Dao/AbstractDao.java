@@ -1,12 +1,13 @@
 package ba.unsa.etf.rpr.Dao;
 
 import ba.unsa.etf.rpr.domain.Idable;
-import ba.unsa.etf.rpr.exceptions.SmartDentinstException;
+import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -54,9 +55,9 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      * Method for mapping ResultSet into Object
      * @param rs - result set from database
      * @return a Bean object for specific table
-     * @throws SmartDentinstException in case of error with db
+     * @throws SmartDentistException in case of error with db
      */
-    public abstract T row2object(ResultSet rs) throws SmartDentinstException;
+    public abstract T row2object(ResultSet rs) throws SmartDentistException;
 
     /**
      * Method for mapping Object into Map
@@ -65,8 +66,12 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      */
     public abstract Map<String, Object> object2row(T object);
 
-    public  T getById(int id) throws SmartDentinstException{
+    public  T getById(int id) throws SmartDentistException {
         return executeQueryUnique("SELECT * FROM " + this.tableName + " WHERE id = ?", new Object[]{id});
+    }
+
+    public List<T> getAll() throws SmartDentistException{
+        return executeQuerry("SELECT * FROM " + tableName, null);
     }
 
 
