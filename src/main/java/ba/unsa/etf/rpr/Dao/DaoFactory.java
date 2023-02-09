@@ -9,4 +9,8 @@ public class DaoFactory {
     public static UserDao userDao(){
         return userDao;
     }
+    public static NarudzbePacijenataDao narudzbePacijenataDao(){
+        return narudzbeDao;
+    }
+
 }
