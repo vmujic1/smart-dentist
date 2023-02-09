@@ -25,6 +25,9 @@ public class MaterijaliSQLImpl implements MaterijaliDao{
         }
     }
 
+    public static MaterijaliDao getInstance() {
+    }
+
 
     @Override
     public Materijali getById(int id) {

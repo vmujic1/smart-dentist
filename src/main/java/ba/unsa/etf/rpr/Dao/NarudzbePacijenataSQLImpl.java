@@ -26,6 +26,9 @@ public class NarudzbePacijenataSQLImpl implements NarudzbePacijenataDao{
         }
     }
 
+    public static NarudzbePacijenataDao getInstance() {
+    }
+
 
     @Override
     public NarudzbePacijenata getById(int id) {

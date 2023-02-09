@@ -22,6 +22,10 @@ public class UserDaoSQLImpl implements UserDao{
             e.printStackTrace();
         }
     }
+
+    public static UserDao getInstance() {
+    }
+
     @Override
     public User getById(int id) {
         String query = "SELECT * FROM user WHERE id = ?";
