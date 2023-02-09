@@ -65,10 +65,9 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      */
     public abstract Map<String, Object> object2row(T object);
 
-
-
-
-
+    public  T getById(int id) throws SmartDentinstException{
+        return executeQueryUnique("SELECT * FROM " + this.tableName + " WHERE id = ?", new Object[]{id});
+    }
 
 
 
