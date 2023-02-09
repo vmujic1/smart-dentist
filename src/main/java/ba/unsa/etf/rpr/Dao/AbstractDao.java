@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Properties;
 
 public abstract class AbstractDao<T extends Idable> implements Dao<T> {
@@ -56,6 +57,13 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      * @throws SmartDentinstException in case of error with db
      */
     public abstract T row2object(ResultSet rs) throws SmartDentinstException;
+
+    /**
+     * Method for mapping Object into Map
+     * @param object - a bean object for specific table
+     * @return key, value sorted map of object
+     */
+    public abstract Map<String, Object> object2row(T object);
 
 
 
