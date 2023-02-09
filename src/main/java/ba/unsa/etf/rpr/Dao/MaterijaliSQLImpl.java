@@ -4,9 +4,8 @@ import ba.unsa.etf.rpr.domain.Materijali;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -53,12 +52,46 @@ public class MaterijaliSQLImpl implements MaterijaliDao{
     }
 
     @Override
-    public List<Materijali> searchByName(String ime) {
+    public Materijali searchByName(String ime) {
+        String query = "SELECT * FROM materijali WHERE naziv = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setString(1,ime);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Materijali m = new Materijali();
+                m.setId(rs.getInt(1));
+                m.setNaziv(rs.getString(2));
+                m.setKoličina(rs.getInt(3));
+                return m;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
-    public List<Materijali> searchByKolicina(int kolicina) {
-        return null;
+    public List<Materijali> searchByKolicina(int kolicina1) {
+        String query = "SELECT * FROM materijali WHERE kolicina = ?";
+        List<Materijali> materijali = new ArrayList<>();
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1,kolicina1);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                Materijali m = new Materijali();
+                m.setId(rs.getInt(1));
+                m.setNaziv(rs.getString(2));
+                m.setKoličina(rs.getInt(3));
+                materijali.add(m);
+            }
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return materijali;
     }
 }
