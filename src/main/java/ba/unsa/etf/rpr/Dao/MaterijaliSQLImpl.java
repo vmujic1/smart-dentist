@@ -28,6 +28,23 @@ public class MaterijaliSQLImpl implements MaterijaliDao{
 
     @Override
     public Materijali getById(int id) {
+        String query = "SELECT * FROM materijali WHERE id = ?";
+        try{
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1,id);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                Materijali m = new Materijali();
+                m.setId(rs.getInt(1));
+                m.setNaziv(rs.getString(2));
+                m.setKoličina(rs.getInt(3));
+                return m;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
