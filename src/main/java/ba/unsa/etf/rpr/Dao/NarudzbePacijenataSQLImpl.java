@@ -20,6 +20,11 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
         return instance;
     }
 
+    public static void removeInstance(){
+        if(instance != null)
+            instance = null;
+    }
+
 
 
 
