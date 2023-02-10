@@ -32,7 +32,15 @@ public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements Materi
 
     @Override
     public Materijali row2object(ResultSet rs) throws SmartDentistException {
-        return null;
+        try {
+            Materijali materijali = new Materijali();
+            materijali.setId(rs.getInt("id"));
+            materijali.setNaziv(rs.getString("naziv"));
+            materijali.setKoličina(rs.getInt("kolicina"));
+            return materijali;
+        } catch (SQLException e){
+            throw new SmartDentistException(e.getMessage(),e);
+        }
     }
 
     @Override
