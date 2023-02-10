@@ -18,6 +18,12 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
         super("users");
     }
 
+    public static UserDaoSQLImpl getInstance(){
+        if(instance == null)
+            instance = new UserDaoSQLImpl();
+        return instance;
+    }
+
 
 
 
