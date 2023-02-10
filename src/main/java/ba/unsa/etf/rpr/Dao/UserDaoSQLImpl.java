@@ -51,5 +51,20 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
         }
     }
 
+    @Override
+    public Map<String, Object> object2row(User object) {
+        Map<String,Object> row = new TreeMap<>();
+        row.put("id",object.getId());
+        row.put("ime_ordinacije",object.getImeOrdinacije());
+        row.put("username",object.getUsername());
+        row.put("lozinka",object.getLozinka());
+        row.put("broj_zaposlenih",object.getBroj_zaposlenih());
+        row.put("adresa",object.getAdresa());
+        row.put("email",object.getEmail());
+        row.put("kontakt_telefon",object.getKontakt_telefon());
+        row.put("broj_poslovnica",object.getBroj_poslovnica());
+        return row;
+    }
+
 
 }
