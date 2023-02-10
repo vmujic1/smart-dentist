@@ -24,6 +24,10 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
         return instance;
     }
 
+    public static void removeInstance(){
+        if(instance != null) instance=null;
+    }
+
 
 
 
