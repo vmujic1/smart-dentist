@@ -13,7 +13,7 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
     private static NarudzbePacijenataSQLImpl instance = null;
 
     private NarudzbePacijenataSQLImpl(){
-        super("narudzbe pacijenata");
+        super("narudzbe_pacijenata");
     }
 
     public static NarudzbePacijenataSQLImpl getInstance(){

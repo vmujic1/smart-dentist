@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
 
-public class Materijali {
+public class Materijali implements Idable {
 
     private int id;
     private String naziv;
