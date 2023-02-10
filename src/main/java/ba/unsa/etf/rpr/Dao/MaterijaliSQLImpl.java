@@ -71,7 +71,7 @@ public class MaterijaliSQLImpl implements MaterijaliDao{
         return null;
     }
 
-    @Override
+
     public Materijali searchByName(String ime) {
         String query = "SELECT * FROM materijali WHERE naziv = ?";
         try {

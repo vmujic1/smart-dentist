@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr.domain;
 import java.util.Date;
 import java.util.Objects;
 
-public class NarudzbePacijenata {
+public class NarudzbePacijenata implements Idable {
 
     private int id;
 
