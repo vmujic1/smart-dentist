@@ -24,6 +24,12 @@ public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements Materi
         return instance;
     }
 
+    public static void removeInstance(){
+        if(instance != null)
+            instance = null;
+    }
+
+
     @Override
     public Materijali row2object(ResultSet rs) throws SmartDentistException {
         return null;
