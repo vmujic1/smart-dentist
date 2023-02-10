@@ -18,6 +18,12 @@ public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements Materi
         super("materijali");
     }
 
+    public static MaterijaliSQLImpl getInstance(){
+        if(instance == null)
+            instance = new MaterijaliSQLImpl();
+        return instance;
+    }
+
     @Override
     public Materijali row2object(ResultSet rs) throws SmartDentistException {
         return null;
