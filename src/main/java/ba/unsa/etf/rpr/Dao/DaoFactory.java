@@ -12,5 +12,7 @@ public class DaoFactory {
     public static NarudzbePacijenataDao narudzbePacijenataDao(){
         return narudzbeDao;
     }
-
+    public static MaterijaliDao materijaliDao(){
+        return materijaliDao;
+    }
 }
