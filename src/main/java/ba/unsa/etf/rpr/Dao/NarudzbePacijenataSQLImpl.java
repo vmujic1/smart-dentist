@@ -45,5 +45,14 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
         }
     }
 
-
+    @Override
+    public Map<String, Object> object2row(NarudzbePacijenata object) {
+        Map<String, Object> row = new TreeMap<>();
+        row.put("id",object.getId());
+        row.put("ime",object.getIme());
+        row.put("prezime",object.getPrezime());
+        row.put("datum",object.getDatum());
+        row.put("povod",object.getPovod());
+        return row;
+    }
 }
