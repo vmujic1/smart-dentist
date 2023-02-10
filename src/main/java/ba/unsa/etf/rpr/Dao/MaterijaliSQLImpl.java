@@ -6,10 +6,7 @@ import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements MaterijaliDao{
 
@@ -45,6 +42,11 @@ public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements Materi
 
     @Override
     public Map<String, Object> object2row(Materijali object) {
-        return null;
+
+        Map<String, Object> row = new TreeMap<>();
+        row.put("id", object.getId());
+        row.put("naziv", object.getNaziv());
+        row.put("kolicina", object.getKoličina());
+        return row;
     }
 }
