@@ -8,10 +8,16 @@ import java.util.Map;
 
 public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> implements NarudzbePacijenataDao{
 
-    private static NarudzbePacijenataDao instance = null;
+    private static NarudzbePacijenataSQLImpl instance = null;
 
     private NarudzbePacijenataSQLImpl(){
         super("narudzbe pacijenata");
+    }
+
+    public static NarudzbePacijenataSQLImpl getInstance(){
+        if(instance == null)
+            instance = new NarudzbePacijenataSQLImpl();
+        return instance;
     }
 
 
