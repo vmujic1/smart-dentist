@@ -96,12 +96,12 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="2">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="258.0" text="Registruj se">
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="258.0" style="-fx-background-radius: 5em;" text="Registruj se">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="258.0" text="Odustani">
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="258.0" style="-fx-background-radius: 5em; -fx-background-color: #0d72a8;" text="Odustani" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
@@ -187,7 +187,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2">
          <children>
-            <Label style="-fx-text-fill: #0d72a8;" text="Registruj se!">
+            <Label style="-fx-text-fill: #0d72a8;" text="Registruj se!" textAlignment="CENTER" underline="true">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
