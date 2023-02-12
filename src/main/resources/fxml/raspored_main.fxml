@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane prefHeight="742.0" prefWidth="1085.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<GridPane prefHeight="742.0" prefWidth="1085.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RasporedMainController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -64,17 +58,17 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <children>
-            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="187.0" style="-fx-background-radius: 5em;" text="Dodaj u raspored">
+            <Button fx:id="dodajId" mnemonicParsing="false" onAction="#dodajOnClick" prefHeight="46.0" prefWidth="187.0" style="-fx-background-radius: 5em;" text="Dodaj u raspored">
                <HBox.margin>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="187.0" style="-fx-background-radius: 5em;" text="Uredi iz rasporeda">
+            <Button fx:id="urediId" mnemonicParsing="false" onAction="#urediOnClick" prefHeight="46.0" prefWidth="187.0" style="-fx-background-radius: 5em;" text="Uredi iz rasporeda">
                <HBox.margin>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="187.0" style="-fx-background-radius: 5em;" text="Obriši iz rasporeda">
+            <Button fx:id="obrisiId" mnemonicParsing="false" onAction="#obrisiOnClick" prefHeight="46.0" prefWidth="187.0" style="-fx-background-radius: 5em;" text="Obriši iz rasporeda">
                <HBox.margin>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                </HBox.margin>
