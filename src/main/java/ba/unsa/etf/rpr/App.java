@@ -16,8 +16,8 @@ import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 public class App extends Application {
 
     public static void main(String[] args) {
-        UserDaoSQLImpl user = new UserDaoSQLImpl();
-       
+        launch(args);
+
     }
     @Override
     public void start(Stage stage) throws Exception {
@@ -25,6 +25,7 @@ public class App extends Application {
         stage.setTitle("SmartDentist");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
+        stage.setTitle("Prijava");
         stage.show();
     }
 
