@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #cccecb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" style="-fx-background-color: #cccecb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SignUpController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,12 +46,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="102.0" prefWidth="230.0">
                      <children>
-                        <TextField>
+                        <TextField fx:id="korisnickoImeId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField>
+                        <TextField fx:id="lozinkaId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
@@ -78,12 +78,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="102.0" prefWidth="230.0">
                      <children>
-                        <TextField>
+                        <TextField fx:id="nazivOrdinacijeId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField>
+                        <TextField fx:id="brojZaposlenihId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
@@ -128,12 +128,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="115.0" prefWidth="261.0">
                      <children>
-                        <TextField>
+                        <TextField fx:id="adresaId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField>
+                        <TextField fx:id="emailId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
@@ -160,12 +160,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="115.0" prefWidth="261.0">
                      <children>
-                        <TextField>
+                        <TextField fx:id="kontaktTelefonId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField>
+                        <TextField fx:id="brojPoslovnicaId">
                            <VBox.margin>
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>

@@ -40,11 +40,11 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
             user.setImeOrdinacije(rs.getString("ime_ordinacije"));
             user.setUsername(rs.getString("username"));
             user.setLozinka(rs.getString("lozinka"));
-            user.setBroj_zaposlenih(rs.getInt("broj_zaposlenih"));
+            user.setBroj_zaposlenih(rs.getString("broj_zaposlenih"));
             user.setAdresa(rs.getString("adresa"));
             user.setEmail(rs.getString("email"));
             user.setKontakt_telefon(rs.getString("kontakt_telefon"));
-            user.setBroj_poslovnica(rs.getInt("broj_poslovnica"));
+            user.setBroj_poslovnica(rs.getString("broj_poslovnica"));
             return user;
         } catch (SQLException e){
             throw new SmartDentistException(e.getMessage(),e);

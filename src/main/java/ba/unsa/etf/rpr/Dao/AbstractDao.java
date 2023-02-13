@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr.Dao;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -10,40 +12,24 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     private  static Connection connection = null;
     private String tableName;
 
-    public AbstractDao(String tableName){
-        this.tableName = tableName;
-    }
+    AbstractDao(String tableName){
+        try{
+            this.tableName = tableName;
+            FileReader reader = new FileReader("db.properties");
+            Properties p = new Properties();
+            p.load(reader);
 
-    private static void createConnection(){
-        if(AbstractDao.connection == null){
-            try{
-                Properties p = new Properties();
-                p.load(ClassLoader.getSystemResource("application.properties").openStream());
+            this.connection = DriverManager.getConnection(p.getProperty("db.url") , p.getProperty("db.username"), p.getProperty("db.password"));
+        }catch (SQLException | IOException e){
+            System.out.println("Unable to connect to the database!");
+            e.printStackTrace();
 
-                String url = p.getProperty("db.connencion_string");
-                String username = p.getProperty("db.username");
-                String password = p.getProperty("db.password");
-
-                AbstractDao.connection = DriverManager.getConnection(url,username,password);
-            }catch (Exception e){
-                e.printStackTrace();
-            } finally {
-                Runtime.getRuntime().addShutdownHook(new Thread(){
-                    @Override
-                    public void run(){
-                        try{
-                            connection.close();
-                        }catch (SQLException e){
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
         }
     }
 
+
     public static Connection getConnection(){
-        return AbstractDao.connection;
+        return connection;
     }
 
     /**
@@ -61,12 +47,43 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
      */
     public abstract Map<String, Object> object2row(T object);
 
-    public  T getById(int id) throws SmartDentistException {
-        return executeQueryUnique("SELECT * FROM " + this.tableName + " WHERE id = ?", new Object[]{id});
+    public T getById(int id) throws SmartDentistException{
+        String query = "SELECT * FROM " + this.tableName + " WHERE id = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                T result = row2object(rs);
+                rs.close();
+                return result;
+
+            } else {
+                throw new RuntimeException("Object not found");
+            }
+
+        } catch (SQLException | SmartDentistException e) {
+            throw new SmartDentistException(e.getMessage(), e);
+        }
     }
 
     public List<T> getAll() throws SmartDentistException{
-        return executeQuery("SELECT * FROM " + tableName, null);
+        String query = "SELECT * FROM " + tableName;
+        List<T> results = new LinkedList<>();
+
+        try{
+            PreparedStatement stmt = getConnection().prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                T object = row2object(rs);
+                results.add(object);
+            }
+            rs.close();
+            return results;
+
+        }catch (SQLException | SmartDentistException e){
+            throw new SmartDentistException(e.getMessage(), e);
+        }
     }
 
     public void delete(int id) throws SmartDentistException{
@@ -92,24 +109,27 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
         try{
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString(), Statement.RETURN_GENERATED_KEYS);
-            // bind params. IMPORTANT treeMap is used to keep columns sorted so params are bind correctly
+
             int counter = 1;
+
             for (Map.Entry<String, Object> entry: row.entrySet()) {
-                if (entry.getKey().equals("id")) continue; // skip ID
+                if (entry.getKey().equals("id")) continue;
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next(); // we know that there is one key
-            item.setId(rs.getInt(1)); //set id to return it back */
+            rs.next();
+            item.setId(rs.getInt(1));
 
             return item;
+
         }catch (SQLException e){
             throw new SmartDentistException(e.getMessage(), e);
         }
     }
+
 
     public T update(T item) throws SmartDentistException{
         Map<String, Object> row = object2row(item);

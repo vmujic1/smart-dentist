@@ -8,13 +8,13 @@ public class User implements Idable {
     private String imeOrdinacije;
     private String username;
     private String lozinka;
-    private int broj_zaposlenih;
+    private String broj_zaposlenih;
     private String adresa;
     private String email;
     private String kontakt_telefon;
-    private  int broj_poslovnica;
+    private  String broj_poslovnica;
 
-    public User(int id, String imeOrdinacije, String username, String lozinka, int broj_zaposlenih, String adresa, String email, String kontakt_telefon, int broj_poslovnica) {
+    public User(int id, String imeOrdinacije, String username, String lozinka, String broj_zaposlenih, String adresa, String email, String kontakt_telefon, String broj_poslovnica) {
         this.id = id;
         this.imeOrdinacije = imeOrdinacije;
         this.username = username;
@@ -58,7 +58,7 @@ public class User implements Idable {
         return username;
     }
 
-    public int getBroj_zaposlenih() {
+    public String getBroj_zaposlenih() {
         return broj_zaposlenih;
     }
 
@@ -74,7 +74,7 @@ public class User implements Idable {
         return kontakt_telefon;
     }
 
-    public int getBroj_poslovnica() {
+    public String getBroj_poslovnica() {
         return broj_poslovnica;
     }
 
@@ -82,7 +82,7 @@ public class User implements Idable {
         this.username = username;
     }
 
-    public void setBroj_zaposlenih(int broj_zaposlenih) {
+    public void setBroj_zaposlenih(String broj_zaposlenih) {
         this.broj_zaposlenih = broj_zaposlenih;
     }
 
@@ -98,7 +98,7 @@ public class User implements Idable {
         this.kontakt_telefon = kontakt_telefon;
     }
 
-    public void setBroj_poslovnica(int broj_poslovnica) {
+    public void setBroj_poslovnica(String broj_poslovnica) {
         this.broj_poslovnica = broj_poslovnica;
     }
 

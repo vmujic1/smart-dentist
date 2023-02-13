@@ -21,7 +21,7 @@ public class App extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root  = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        Parent root  = FXMLLoader.load(getClass().getResource("/fxml/signup.fxml"));
         stage.setTitle("SmartDentist");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(false);
