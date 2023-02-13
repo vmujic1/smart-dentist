@@ -21,7 +21,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
             this.connection = DriverManager.getConnection(p.getProperty("db.url") , p.getProperty("db.username"), p.getProperty("db.password"));
         }catch (SQLException | IOException e){
-            System.out.println("Unable to connect to the database!");
+            System.out.println("Neuspjesna konekcija na bazu!");
             e.printStackTrace();
 
         }
