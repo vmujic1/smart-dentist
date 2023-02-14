@@ -139,7 +139,7 @@ public class RasporedMainController {
     }
     public void cijeliRasporedOnAction(ActionEvent actionEvent) throws SmartDentistException {
         popuniTabelu();
-
+        tabelaId.refresh();
     }
 
     public void odjaviSeOnClick(ActionEvent actionEvent) {

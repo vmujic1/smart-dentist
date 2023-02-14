@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="558.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RasporedMainController">
+<GridPane prefHeight="558.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RasporedMainController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -73,24 +82,28 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <children>
-            <RadioButton fx:id="dnevniRasporedId" mnemonicParsing="false" onAction="#dnevniRasporedOnAction" text="Dnevni raspored">
-               <HBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </HBox.margin>
-               <padding>
-                  <Insets left="40.0" right="40.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton fx:id="mjesecniRasporedId" mnemonicParsing="false" onAction="#mjesecniRasporedOnAction" text="Mjesecni raspored">
-               <padding>
-                  <Insets left="40.0" right="40.0" />
-               </padding>
-            </RadioButton>
-            <RadioButton fx:id="cijeliRasporedId" mnemonicParsing="false" onAction="#cijeliRasporedOnAction" text="Prikazi cijeli raspored">
-               <padding>
-                  <Insets left="40.0" right="40.0" />
-               </padding>
-            </RadioButton>
+            <ButtonBar prefHeight="43.0" prefWidth="685.0">
+               <buttons>
+                  <RadioButton fx:id="mjesecniRasporedId" mnemonicParsing="false" onAction="#mjesecniRasporedOnAction" text="Mjesecni raspored">
+                     <padding>
+                        <Insets left="40.0" right="40.0" />
+                     </padding>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="a" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="cijeliRasporedId" mnemonicParsing="false" onAction="#cijeliRasporedOnAction" text="Prikazi cijeli raspored" toggleGroup="$a">
+                     <padding>
+                        <Insets left="40.0" right="40.0" />
+                     </padding>
+                  </RadioButton>
+                  <RadioButton fx:id="dnevniRasporedId" mnemonicParsing="false" onAction="#dnevniRasporedOnAction" text="Dnevni raspored" toggleGroup="$a">
+                     <padding>
+                        <Insets left="40.0" right="40.0" />
+                     </padding>
+                  </RadioButton>
+               </buttons>
+            </ButtonBar>
          </children>
       </HBox>
    </children>
