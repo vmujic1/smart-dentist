@@ -16,7 +16,7 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
     AbstractDao(String tableName){
         try{
             this.tableName = tableName;
-            FileReader reader = new FileReader("db.properties");
+            FileReader reader = new FileReader("db1.properties");
             Properties p = new Properties();
             p.load(reader);
 
