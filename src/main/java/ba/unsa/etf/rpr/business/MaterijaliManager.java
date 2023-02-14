@@ -10,4 +10,8 @@ public class MaterijaliManager {
     public static List<Materijali> getAll() throws SmartDentistException {
         return DaoFactory.materijaliDao().getAll();
     }
+
+    public static Materijali add(Materijali a) throws SmartDentistException{
+        return DaoFactory.materijaliDao().add(a);
+    }
 }
