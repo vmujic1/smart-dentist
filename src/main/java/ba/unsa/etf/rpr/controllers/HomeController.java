@@ -42,4 +42,10 @@ public class HomeController {
         os.close();
 
     }
+
+    public void aboutOnClick(ActionEvent actionEvent) {
+        Stage os = (Stage) rasporedId.getScene().getWindow();
+        openDialog("O nama", "/fxml/about.fxml",null);
+
+     }
 }
