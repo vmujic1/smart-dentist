@@ -78,13 +78,36 @@ public class MaterijaliMainController {
     public void urediIzTabeleAction(ActionEvent actionEvent) {
     }
 
-    public void obrisiIzTabeleAction(ActionEvent actionEvent) {
+    public void obrisiIzTabeleAction(ActionEvent actionEvent) throws SmartDentistException {
+        Materijali selected = (Materijali) tabelaId.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            MaterijaliManager.delete(selected.getId());
+            popuniTabelu();
+            Alert alet = new Alert(Alert.AlertType.INFORMATION);
+            alet.setHeaderText(null);
+            alet.setTitle("Uspjesno!");
+            alet.setContentText("Uspjesno ste obrisali stavku iz skladista!");
+            alet.showAndWait();
+        } else{
+            Alert alet = new Alert(Alert.AlertType.WARNING);
+            alet.setHeaderText(null);
+            alet.setTitle("Greska");
+            alet.setContentText("Odaberite stavku iz skladista.");
+            alet.showAndWait();
+
+        }
     }
 
     public void odjaviSeOnAction(ActionEvent actionEvent) {
+        openDialog("Prijava","/fxml/login.fxml","null");
+        Stage os = (Stage) tabelaId.getScene().getWindow();
+        os.close();
 
     }
 
     public void rasporedPacijenataOnAction(ActionEvent actionEvent) {
+        openDialog("Raspored","/fxml/raspored_main.fxml","null");
+        Stage os = (Stage) tabelaId.getScene().getWindow();
+        os.close();
     }
 }

@@ -14,4 +14,8 @@ public class MaterijaliManager {
     public static Materijali add(Materijali a) throws SmartDentistException{
         return DaoFactory.materijaliDao().add(a);
     }
+
+    public static void delete(int id) throws SmartDentistException{
+        DaoFactory.materijaliDao().delete(id);
+    }
 }
