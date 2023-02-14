@@ -68,10 +68,17 @@ public class RasporedMainController {
             RasporedManager.delete(selected.getId());
             popuniTabelu();
             Alert alet = new Alert(Alert.AlertType.INFORMATION);
-            alet.setHeaderText("null");
+            alet.setHeaderText(null);
             alet.setTitle("Uspjesno!");
             alet.setContentText("Uspjesno ste obrisali pacijenta iz rasporeda!");
             alet.showAndWait();
+        } else{
+            Alert alet = new Alert(Alert.AlertType.WARNING);
+            alet.setHeaderText(null);
+            alet.setTitle("Greska");
+            alet.setContentText("Odaberite pacijenta iz rasporeda.");
+            alet.showAndWait();
+
         }
     }
 }
