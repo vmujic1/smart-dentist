@@ -19,6 +19,7 @@ public class HomeController {
     }
 
     public void skladisteMaterijalaOnClick(ActionEvent actionEvent) {
+        openDialog("Skladiste materijala", "/fxml/materijali_main.fxml",null);
     }
 
     private void openDialog(String title, String file, Object controller){
