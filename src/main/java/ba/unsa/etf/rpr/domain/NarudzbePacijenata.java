@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,10 +10,10 @@ public class NarudzbePacijenata implements Idable {
 
     private String ime;
     private String prezime;
-    private Date datum;
+    private LocalDate datum;
     private String povod;
 
-    public NarudzbePacijenata(int id,String ime, String prezime, Date datum, String povod) {
+    public NarudzbePacijenata(int id,String ime, String prezime, LocalDate datum, String povod) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -38,7 +39,7 @@ public class NarudzbePacijenata implements Idable {
         return prezime;
     }
 
-    public Date getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
@@ -54,7 +55,7 @@ public class NarudzbePacijenata implements Idable {
         this.prezime = prezime;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 

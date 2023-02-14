@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RasporedDodajController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.RasporedDodajController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -91,22 +84,22 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField style="-fx-background-radius: 5em;" GridPane.columnIndex="1">
+                  <TextField fx:id="imeId" style="-fx-background-radius: 5em;" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets bottom="30.0" left="10.0" right="180.0" top="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField prefHeight="25.0" prefWidth="313.0" style="-fx-background-radius: 5em;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="prezimeId" prefHeight="25.0" prefWidth="313.0" style="-fx-background-radius: 5em;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="30.0" left="10.0" right="180.0" top="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField style="-fx-background-radius: 5em;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="opisId" style="-fx-background-radius: 5em;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="30.0" left="10.0" right="30.0" top="30.0" />
                      </GridPane.margin>
                   </TextField>
-                  <DatePicker prefWidth="313.0" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <DatePicker fx:id="datumId" prefWidth="313.0" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets bottom="30.0" left="10.0" right="180.0" top="30.0" />
                      </GridPane.margin>

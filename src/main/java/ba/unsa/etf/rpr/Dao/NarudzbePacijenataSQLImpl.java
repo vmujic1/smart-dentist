@@ -3,10 +3,11 @@ package ba.unsa.etf.rpr.Dao;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.TreeMap;
+import java.time.LocalDate;
+import java.util.*;
 
 public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> implements NarudzbePacijenataDao{
 
@@ -37,7 +38,7 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
             narudzbe.setId(rs.getInt("id"));
             narudzbe.setIme(rs.getString("ime"));
             narudzbe.setPrezime(rs.getString("prezime"));
-            narudzbe.setDatum(rs.getDate("datum"));
+            narudzbe.setDatum(rs.getDate("datum").toLocalDate());
             narudzbe.setPovod(rs.getString("povod"));
             return narudzbe;
         } catch (SQLException e){
@@ -55,4 +56,26 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
         row.put("povod",object.getPovod());
         return row;
     }
-}
+
+    @Override
+    public List<NarudzbePacijenata> getByDate(LocalDate date) throws SmartDentistException {
+        List<NarudzbePacijenata> listaDnevna = new ArrayList<>();
+        NarudzbePacijenata n = new NarudzbePacijenata();
+        try{
+            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM user WHERE datum = ? ");
+            stmt.setString(1, String.valueOf(date));
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                n = row2object(rs);
+                listaDnevna.add(n);
+                rs.close();
+            }
+        } catch (SQLException e) {
+            throw new SmartDentistException(e.getMessage(),e);
+        }
+        return listaDnevna;
+    }
+
+    }
+

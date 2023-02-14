@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.Dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class RasporedManager {
@@ -14,6 +15,14 @@ public class RasporedManager {
 
     public static void delete(int id) throws SmartDentistException {
         DaoFactory.narudzbePacijenataDao().delete(id);
+    }
+
+    public static NarudzbePacijenata add(NarudzbePacijenata a) throws SmartDentistException {
+        return DaoFactory.narudzbePacijenataDao().add(a);
+    }
+
+    public static List<NarudzbePacijenata> getByDate(LocalDate date) throws SmartDentistException {
+        return DaoFactory.narudzbePacijenataDao().getByDate(date);
     }
 
 }
