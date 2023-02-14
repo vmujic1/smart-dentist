@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,6 +15,12 @@ public class RasporedMainController {
     public Button dodajId;
     public Button urediId;
     public Button obrisiId;
+    public TableView tabelaId;
+    public TableColumn idKolonaId;
+    public TableColumn imeKolonaId;
+    public TableColumn prezimeKolonaId;
+    public TableColumn opisKolonaId;
+    public TableColumn datumKolonaId;
 
     public void dodajOnClick(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader =  new FXMLLoader(getClass().getResource("/fxml/raspored_dodaj.fxml"));
