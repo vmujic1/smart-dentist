@@ -32,7 +32,7 @@
                <columns>
                   <TableColumn fx:id="idKolonaId" prefWidth="62.0" text="ID" />
                   <TableColumn fx:id="imeKolonaId" prefWidth="135.0" text="IME" />
-                  <TableColumn fx:id="prezimeKolonaId" prefWidth="179.0" text="KOLICINA" />
+                  <TableColumn fx:id="kolicinaKolonaId" prefWidth="179.0" text="KOLICINA" />
                </columns>
             </TableView>
          </children>
