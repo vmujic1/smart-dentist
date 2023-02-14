@@ -8,10 +8,16 @@ import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Date;
+
+import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class MaterijaliMainController {
     public TableView tabelaId;
@@ -37,6 +43,21 @@ public class MaterijaliMainController {
             tabelaId.refresh();
         }catch (SmartDentistException e){
             new Alert(Alert.AlertType.NONE,e.getMessage(), ButtonType.OK);
+        }
+    }
+
+    private void openDialog(String title, String file, Object controller){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
+            loader.setController(controller);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setTitle(title);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setResizable(false);
+            stage.show();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
     }
 
