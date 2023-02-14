@@ -29,6 +29,8 @@ public class MaterijaliMainController {
     public TextField pretragaId;
     public TableColumn kolicinaKolonaId;
 
+    public static Materijali materijal;
+
     MaterijaliManager materijaliManager = new MaterijaliManager();
 
     @FXML
@@ -75,7 +77,23 @@ public class MaterijaliMainController {
         popuniTabelu();
     }
 
-    public void urediIzTabeleAction(ActionEvent actionEvent) {
+    public static Materijali posalji() throws  SmartDentistException{
+        return materijal;
+    }
+
+    public void urediIzTabeleAction(ActionEvent actionEvent) throws IOException {
+        Materijali selected = (Materijali) tabelaId.getSelectionModel().getSelectedItem();
+        materijal = selected;
+
+        FXMLLoader fxmlLoader =  new FXMLLoader(getClass().getResource("/fxml/materijali_ured.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.setResizable(false);
+        stage.show();
+        popuniTabelu();
     }
 
     public void obrisiIzTabeleAction(ActionEvent actionEvent) throws SmartDentistException {
@@ -110,4 +128,6 @@ public class MaterijaliMainController {
         Stage os = (Stage) tabelaId.getScene().getWindow();
         os.close();
     }
+
+
 }
