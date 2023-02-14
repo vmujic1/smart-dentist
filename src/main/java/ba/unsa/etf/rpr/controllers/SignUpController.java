@@ -4,6 +4,8 @@ import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -34,8 +36,14 @@ public class SignUpController {
         u.setKontakt_telefon(kontaktTelefonId.getText());
         u.setBroj_poslovnica(brojPoslovnicaId.getText());
         userManager.add(u);
-        Stage s = (Stage)adresaId.getScene().getWindow();
-        s.close();
+        Node n = (Node) actionEvent.getSource();
+        Stage stage = (Stage) n.getScene().getWindow();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success!");
+        alert.setHeaderText(null);
+        alert.setContentText("Your account has been created. You can now log in.");
+        alert.showAndWait();
+        stage.close();
 
 
     }

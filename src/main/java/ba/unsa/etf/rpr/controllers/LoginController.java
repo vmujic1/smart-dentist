@@ -1,13 +1,14 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -22,19 +23,29 @@ public class LoginController {
     public Button prijaviSeId;
     public Button registrujSeId;
 
-    public void prijaviSeOnClick(ActionEvent actionEvent) throws IOException {
-        Parent signUpParent = FXMLLoader.load(getClass().getResource("/fxml/raspored_main.fxml"));
-        Scene signUpScene = new Scene(signUpParent);
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(signUpScene);
-        stage.setResizable(false);
-        stage.setTitle("Raspored");
-        stage.show();
+    private final UserManager userManager = new UserManager();
+    public TextField korisnickoImeID;
+    public PasswordField lozinkaId;
+
+
+    public void prijaviSeOnClick(ActionEvent actionEvent) throws IOException, SmartDentistException {
+        User novi = new User();
+
+        novi = userManager.getByUsername(korisnickoImeID.getText());
+
+        if(novi.getUsername() == korisnickoImeID.getText() && novi.getLozinka() == lozinkaId.getText()){
+            openDialog("Home","/fxml/home.fxml",null);
+
+        } else{
+            Alert alet = new Alert(Alert.AlertType.ERROR);
+            alet.showAndWait();
+
+        }
 
     }
 
     public void registrujSeOnClick(ActionEvent actionEvent) throws IOException {
-        openDialog("Registracija","/fxml/signup.fxml",new SignUpController());
+        openDialog("Registracija","/fxml/signup.fxml",null);
 
     }
 

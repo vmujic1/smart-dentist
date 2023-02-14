@@ -10,6 +10,10 @@ public class UserManager {
         return DaoFactory.userDao().add(u);
     }
 
+    public User getByUsername(String username) throws SmartDentistException{
+        return DaoFactory.userDao().getByUsername(username);
+    }
+
 
 
 }

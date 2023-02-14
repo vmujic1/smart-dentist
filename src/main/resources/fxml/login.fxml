@@ -89,7 +89,7 @@
                         <Image url="@../img/password-76-512.png" />
                      </image>
                   </ImageView>
-                  <PasswordField promptText="Lozinka">
+                  <PasswordField fx:id="lozinkaId" promptText="Lozinka">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="50.0" top="10.0" />
                      </HBox.margin>

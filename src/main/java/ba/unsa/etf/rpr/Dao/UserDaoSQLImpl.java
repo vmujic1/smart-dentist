@@ -16,7 +16,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
     private static UserDaoSQLImpl instance = null;
 
     private UserDaoSQLImpl(){
-        super("users");
+        super("user");
     }
 
     public static UserDaoSQLImpl getInstance(){
@@ -67,4 +67,8 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
     }
 
 
+    @Override
+    public User getByUsername(String username) throws SmartDentistException {
+        return (User) executeQuery("SELECT * from user WHERE username = ?", new Object[]{username});
+    }
 }

@@ -50,7 +50,7 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     public T getById(int id) throws SmartDentistException{
         String query = "SELECT * FROM " + this.tableName + " WHERE id = ?";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(query);
+            PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
