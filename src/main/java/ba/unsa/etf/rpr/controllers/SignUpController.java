@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.Dao.DaoFactory;
 import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
@@ -11,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class SignUpController {
     private final UserManager userManager = new UserManager();
@@ -25,27 +28,74 @@ public class SignUpController {
     public TextField kontaktTelefonId;
     public TextField brojPoslovnicaId;
 
+    List<User> users = DaoFactory.userDao().getAll();
+
+    public SignUpController() throws SmartDentistException {
+    }
+
     public void registrujSeOnClick(ActionEvent actionEvent) throws SmartDentistException {
-        User u = new User();
-        u.setUsername(korisnickoImeId.getText());
-        u.setLozinka(lozinkaId.getText());
-        u.setImeOrdinacije(nazivOrdinacijeId.getText());
-        u.setBroj_zaposlenih(brojZaposlenihId.getText());
-        u.setAdresa(adresaId.getText());
-        u.setEmail(emailId.getText());
-        u.setKontakt_telefon(kontaktTelefonId.getText());
-        u.setBroj_poslovnica(brojPoslovnicaId.getText());
-        userManager.add(u);
-        Node n = (Node) actionEvent.getSource();
-        Stage stage = (Stage) n.getScene().getWindow();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success!");
-        alert.setHeaderText(null);
-        alert.setContentText("Your account has been created. You can now log in.");
-        alert.showAndWait();
-        stage.close();
+        if(korisnickoImeId.getText().isEmpty() || lozinkaId.getText().isEmpty() || nazivOrdinacijeId.getText().isEmpty() || brojZaposlenihId.getText().isEmpty() || adresaId.getText().isEmpty() || emailId.getText().isEmpty() || kontaktTelefonId.getText().isEmpty() || brojZaposlenihId.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText("Pogresni podaci!");
+            alert.setContentText("Popunite sva trazena polja.");
+            alert.showAndWait();
+        }
 
+        boolean istoKorisnicko = false;
+        boolean istiNazivOrdinacije = false;
 
+        for(User useri : users){
+            if(useri.getUsername().equals(korisnickoImeId.getText())){
+                istoKorisnicko = true;
+                break;
+            } else if(useri.getImeOrdinacije().equals(nazivOrdinacijeId.getText())){
+                istiNazivOrdinacije = true;
+                break;
+            }
+        }
+
+        if(istoKorisnicko){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText("Pogresni podaci!");
+            alert.setContentText("Korisnicko ime vec u upotrebi.");
+            alert.showAndWait();
+
+        } else if(istiNazivOrdinacije){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText("Pogresni podaci!");
+            alert.setContentText("Ordinacija je već registrovana na nasu aplikaciju.");
+            alert.showAndWait();
+        } else if(lozinkaId.getText().length() < 5){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText("Pogresni podaci!");
+            alert.setContentText("Lozinka mora sadrzavati vise od 5 karaktera.");
+            alert.showAndWait();
+        } else {
+
+            User u = new User();
+            u.setUsername(korisnickoImeId.getText());
+            u.setLozinka(lozinkaId.getText());
+            u.setImeOrdinacije(nazivOrdinacijeId.getText());
+            u.setBroj_zaposlenih(brojZaposlenihId.getText());
+            u.setAdresa(adresaId.getText());
+            u.setEmail(emailId.getText());
+            u.setKontakt_telefon(kontaktTelefonId.getText());
+            u.setBroj_poslovnica(brojPoslovnicaId.getText());
+            userManager.add(u);
+            Node n = (Node) actionEvent.getSource();
+            Stage stage = (Stage) n.getScene().getWindow();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success!");
+            alert.setHeaderText(null);
+            alert.setContentText("Your account has been created. You can now log in.");
+            alert.showAndWait();
+            stage.close();
+
+        }
     }
 
     public void odustaniOnClick(MouseEvent mouseEvent) {

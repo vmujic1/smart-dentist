@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-public abstract class AbstractDao<T extends Idable> implements Dao<T> {
-    private  static Connection connection = null;
-    private String tableName;
+public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
+
+    private Connection connection;
+    private  String tableName;
 
     AbstractDao(String tableName){
         try{
@@ -21,40 +22,28 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
             this.connection = DriverManager.getConnection(p.getProperty("db.url") , p.getProperty("db.username"), p.getProperty("db.password"));
         }catch (SQLException | IOException e){
-            System.out.println("Neuspjesna konekcija na bazu!");
+            System.out.println("Unable to connect to the database!");
             e.printStackTrace();
 
         }
     }
 
-
-    public static Connection getConnection(){
+    public Connection getConnection(){
         return connection;
     }
 
-    /**
-     * Method for mapping ResultSet into Object
-     * @param rs - result set from database
-     * @return a Bean object for specific table
-     * @throws SmartDentistException in case of error with db
-     */
-    public abstract T row2object(ResultSet rs) throws SmartDentistException;
+    public abstract Type row2object(ResultSet rs) throws SmartDentistException;
 
-    /**
-     * Method for mapping Object into Map
-     * @param object - a bean object for specific table
-     * @return key, value sorted map of object
-     */
-    public abstract Map<String, Object> object2row(T object);
+    public abstract Map<String, Object> object2row(Type object);
 
-    public T getById(int id) throws SmartDentistException{
+    public Type getById(int id) throws SmartDentistException{
         String query = "SELECT * FROM " + this.tableName + " WHERE id = ?";
         try {
-            PreparedStatement stmt = connection.prepareStatement(query);
+            PreparedStatement stmt = this.connection.prepareStatement(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                T result = row2object(rs);
+                Type result = row2object(rs);
                 rs.close();
                 return result;
 
@@ -67,15 +56,15 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         }
     }
 
-    public List<T> getAll() throws SmartDentistException{
+    public List<Type> getAll() throws SmartDentistException{
         String query = "SELECT * FROM " + tableName;
-        List<T> results = new LinkedList<>();
+        List<Type> results = new LinkedList<>();
 
         try{
             PreparedStatement stmt = getConnection().prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()){
-                T object = row2object(rs);
+                Type object = row2object(rs);
                 results.add(object);
             }
             rs.close();
@@ -87,18 +76,19 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
     }
 
     public void delete(int id) throws SmartDentistException{
-        String query = "DELETE FROM " + tableName + " WHERE id = ?";
+        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+
         try{
-            PreparedStatement stmt = getConnection().prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-            stmt.setObject(1,id);
+            PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setObject(1, id);
             stmt.executeUpdate();
-        } catch (SQLException e){
-            throw new SmartDentistException(e.getMessage(),e);
+
+        }catch (SQLException e){
+            throw new SmartDentistException(e.getMessage(), e);
         }
-        
     }
 
-    public T add(T item) throws SmartDentistException{
+    public Type add(Type item) throws SmartDentistException{
         Map<String, Object> row = object2row(item);
         Map.Entry<String, String> columns = prepareInsertParts(row);
 
@@ -130,11 +120,11 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
         }
     }
 
-
-    public T update(T item) throws SmartDentistException{
+    public Type update(Type item) throws SmartDentistException{
         Map<String, Object> row = object2row(item);
         String updateColumns = prepareUpdateParts(row);
         StringBuilder builder = new StringBuilder();
+
         builder.append("UPDATE ")
                 .append(tableName)
                 .append(" SET ")
@@ -143,93 +133,63 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
 
         try{
             PreparedStatement stmt = getConnection().prepareStatement(builder.toString());
+
             int counter = 1;
+
             for (Map.Entry<String, Object> entry: row.entrySet()) {
-                if (entry.getKey().equals("id")) continue; // skip ID
+                if (entry.getKey().equals("id")) continue;
                 stmt.setObject(counter, entry.getValue());
                 counter++;
             }
             stmt.setObject(counter, item.getId());
             stmt.executeUpdate();
+
             return item;
+
         }catch (SQLException e){
             throw new SmartDentistException(e.getMessage(), e);
         }
     }
 
     /**
-     * Utility method for executing any kind of query
-     * @param query - SQL query
-     * @param params - params for query
-     * @return List of objects from database
-     * @throws SmartDentistException in case of error with db
-     */
-    public List<T> executeQuery(String query, Object[] params) throws SmartDentistException{
-        try {
-            PreparedStatement stmt = getConnection().prepareStatement(query);
-            if (params != null){
-                for(int i = 1; i <= params.length; i++){
-                    stmt.setObject(i, params[i-1]);
-                }
-            }
-            ResultSet rs = stmt.executeQuery();
-            ArrayList<T> resultList = new ArrayList<>();
-            while (rs.next()) {
-                resultList.add(row2object(rs));
-            }
-            return resultList;
-        } catch (SQLException e) {
-            throw new SmartDentistException(e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Utility for query execution that always return single record
-     * @param query - query that returns single record
-     * @param params - list of params for sql query
-     * @return Object
-     * @throws SmartDentistException in case when object is not found
-     */
-    public T executeQueryUnique(String query, Object[] params) throws SmartDentistException{
-        List<T> result = executeQuery(query, params);
-        if (result != null && result.size() == 1){
-            return result.get(0);
-        }else{
-            throw new SmartDentistException("Object not found");
-        }
-    }
-
-    /**
-     * Accepts KV storage of column names and return CSV of columns and question marks for insert statement
-     * Example: (id, name, date) ?,?,?
+     * Prepare sql query for insert
+     * Example: (id,name) (?,?,?)
+     * @param row - the row to be inserted
+     * @return map in which the query for insert was created
      */
     private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row){
         StringBuilder columns = new StringBuilder();
         StringBuilder questions = new StringBuilder();
 
         int counter = 0;
+
         for (Map.Entry<String, Object> entry: row.entrySet()) {
             counter++;
-            if (entry.getKey().equals("id")) continue; //skip insertion of id due autoincrement
+
+            if (entry.getKey().equals("id")) continue;
             columns.append(entry.getKey());
             questions.append("?");
+
             if (row.size() != counter) {
                 columns.append(",");
                 questions.append(",");
             }
         }
-        return new AbstractMap.SimpleEntry<>(columns.toString(), questions.toString());
+
+        return new AbstractMap.SimpleEntry<String,String>(columns.toString(), questions.toString());
     }
 
     /**
-     * Prepare columns for update statement id=?, name=?, ...
-     * @param row - row to be converted intro string
-     * @return String for update statement
+     * Prepare columns for update statement
+     * Example: id=?, name=?
+     * @param row - the row to be updated
+     * @return map in which the query for update was created
      */
     private String prepareUpdateParts(Map<String, Object> row){
         StringBuilder columns = new StringBuilder();
 
         int counter = 0;
+
         for (Map.Entry<String, Object> entry: row.entrySet()) {
             counter++;
             if (entry.getKey().equals("id")) continue; //skip update of id due where clause
@@ -238,10 +198,8 @@ public abstract class AbstractDao<T extends Idable> implements Dao<T> {
                 columns.append(",");
             }
         }
+
         return columns.toString();
     }
-
-
-
 
 }

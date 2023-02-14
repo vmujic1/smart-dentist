@@ -12,23 +12,9 @@ import java.util.Properties;
 import java.util.TreeMap;
 
 public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
-
-    private static UserDaoSQLImpl instance = null;
-
-    private UserDaoSQLImpl(){
+     UserDaoSQLImpl(){
         super("user");
     }
-
-    public static UserDaoSQLImpl getInstance(){
-        if(instance == null)
-            instance = new UserDaoSQLImpl();
-        return instance;
-    }
-
-    public static void removeInstance(){
-        if(instance != null) instance=null;
-    }
-
 
 
 
@@ -69,6 +55,19 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao{
 
     @Override
     public User getByUsername(String username) throws SmartDentistException {
-        return (User) executeQuery("SELECT * from user WHERE username = ?", new Object[]{username});
+        User user = new User();
+        try{
+            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM user WHERE username = ? ");
+            stmt.setString(1,username);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                user = row2object(rs);
+                rs.close();
+            }
+        } catch (SQLException e) {
+            throw new SmartDentistException(e.getMessage(),e);
+        }
+        return user;
     }
 }

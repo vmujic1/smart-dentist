@@ -1,8 +1,11 @@
 package ba.unsa.etf.rpr.business;
 
+import ba.unsa.etf.rpr.Dao.Dao;
 import ba.unsa.etf.rpr.Dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
+
+import java.util.List;
 
 public class UserManager {
 
@@ -12,6 +15,11 @@ public class UserManager {
 
     public User getByUsername(String username) throws SmartDentistException{
         return DaoFactory.userDao().getByUsername(username);
+    }
+
+    public List<User> getAll() throws SmartDentistException{
+        return DaoFactory.userDao().getAll();
+
     }
 
 

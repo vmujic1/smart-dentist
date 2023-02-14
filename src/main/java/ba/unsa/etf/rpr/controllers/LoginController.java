@@ -29,16 +29,37 @@ public class LoginController {
 
 
     public void prijaviSeOnClick(ActionEvent actionEvent) throws IOException, SmartDentistException {
-        User novi = new User();
 
-        novi = userManager.getByUsername(korisnickoImeID.getText());
 
-        if(novi.getUsername() == korisnickoImeID.getText() && novi.getLozinka() == lozinkaId.getText()){
-            openDialog("Home","/fxml/home.fxml",null);
 
-        } else{
-            Alert alet = new Alert(Alert.AlertType.ERROR);
-            alet.showAndWait();
+        try{
+            User user = new User();
+            user = userManager.getByUsername(korisnickoImeID.getText());
+            if(lozinkaId.getText().equals(user.getLozinka())){
+                openDialog("Home","/fxml/home.fxml",null);
+                Stage os = (Stage) prijaviSeId.getScene().getWindow();
+                os.close();
+            } else if(korisnickoImeID.getText().isEmpty() || lozinkaId.getText().isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greska!");
+                alert.setContentText("Neispravno korisnicko ime ili lozinka!");
+                alert.showAndWait();}
+                else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Greska!");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Neispravno korisnicko ime ili lozinka!");
+                    alert.showAndWait();
+
+                }
+            }
+
+        catch (SmartDentistException  e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska!");
+            alert.setContentText("Neispravno korisnicko ime ili lozinka!");
+            alert.showAndWait();
+
 
         }
 

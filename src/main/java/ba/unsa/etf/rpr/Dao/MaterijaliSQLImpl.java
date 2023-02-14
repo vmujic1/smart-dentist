@@ -11,7 +11,7 @@ import java.util.*;
 public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements MaterijaliDao{
 
     private static MaterijaliSQLImpl instance = null;
-    private MaterijaliSQLImpl() {
+    MaterijaliSQLImpl() {
         super("materijali");
     }
 
