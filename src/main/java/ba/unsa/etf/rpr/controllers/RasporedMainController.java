@@ -1,15 +1,16 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.Dao.DaoFactory;
 import ba.unsa.etf.rpr.business.RasporedManager;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
+import ba.unsa.etf.rpr.exceptions.SmartDentistException;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -39,6 +40,12 @@ public class RasporedMainController {
     }
 
     private void popuniTabelu() {
+        try{
+            tabelaId.setItems(FXCollections.observableList(RasporedManager.getAll()));
+            tabelaId.refresh();
+        }catch (SmartDentistException e){
+            new Alert(Alert.AlertType.NONE,e.getMessage(), ButtonType.OK);
+        }
     }
 
 
@@ -55,6 +62,16 @@ public class RasporedMainController {
     public void urediOnClick(ActionEvent actionEvent) {
     }
 
-    public void obrisiOnClick(ActionEvent actionEvent) {
+    public void obrisiOnClick(ActionEvent actionEvent) throws SmartDentistException {
+        NarudzbePacijenata selected = (NarudzbePacijenata) tabelaId.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            RasporedManager.delete(selected.getId());
+            popuniTabelu();
+            Alert alet = new Alert(Alert.AlertType.INFORMATION);
+            alet.setHeaderText("null");
+            alet.setTitle("Uspjesno!");
+            alet.setContentText("Uspjesno ste obrisali pacijenta iz rasporeda!");
+            alet.showAndWait();
+        }
     }
 }

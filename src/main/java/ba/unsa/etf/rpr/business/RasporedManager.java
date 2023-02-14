@@ -8,8 +8,12 @@ import java.util.List;
 
 public class RasporedManager {
 
-    public List<NarudzbePacijenata> getAll() throws SmartDentistException{
+    public static List<NarudzbePacijenata> getAll() throws SmartDentistException{
         return DaoFactory.narudzbePacijenataDao().getAll();
+    }
+
+    public static void delete(int id) throws SmartDentistException {
+        DaoFactory.narudzbePacijenataDao().delete(id);
     }
 
 }
