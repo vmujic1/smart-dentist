@@ -74,5 +74,8 @@ public class MaterijaliUrediController {
     }
 
     public void odustaniOnClick(ActionEvent actionEvent) {
+        Stage os = (Stage) nazivId.getScene().getWindow();
+        openDialog("Skladiste materijala", "/fxml/materijali_main.fxml", null);
+        os.close();}
     }
-}
+
