@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> implements NarudzbePacijenataDao{
 
@@ -77,5 +80,25 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
         return listaDnevna;
     }
 
+    @Override
+    public NarudzbePacijenata getByName(String name) throws SmartDentistException {
+
+        NarudzbePacijenata pacijent = new NarudzbePacijenata();
+        try{
+            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM user WHERE ime = ? ");
+            stmt.setString(1,name);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                pacijent = row2object(rs);
+                rs.close();
+            }
+        } catch (SQLException e) {
+            throw new SmartDentistException(e.getMessage(),e);
+        }
+        return pacijent;
     }
+
+
+}
 

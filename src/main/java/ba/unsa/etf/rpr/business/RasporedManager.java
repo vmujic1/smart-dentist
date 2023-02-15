@@ -25,4 +25,7 @@ public class RasporedManager {
         return DaoFactory.narudzbePacijenataDao().getByDate(date);
     }
 
+    public static NarudzbePacijenata getByName(String name) throws SmartDentistException{
+        return DaoFactory.narudzbePacijenataDao().getByName(name);
+    }
 }

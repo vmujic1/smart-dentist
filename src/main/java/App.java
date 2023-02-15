@@ -1,5 +1,6 @@
 import ba.unsa.etf.rpr.business.MaterijaliManager;
 import ba.unsa.etf.rpr.business.RasporedManager;
+import ba.unsa.etf.rpr.domain.Materijali;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import org.apache.commons.cli.*;
@@ -65,9 +66,39 @@ public class App {
     } else if (cl.hasOption(obrisiPacijentaIzRasporeda.getOpt() ) || cl.hasOption(obrisiPacijentaIzRasporeda.getLongOpt())){
       NarudzbePacijenata n = new NarudzbePacijenata();
       try{
+        n = RasporedManager.getByName(cl.getArgList().get(0));
+        RasporedManager.delete(n.getId());
+        System.out.println("Stavka uspjesno obirsana iz rasporeda");
+      } catch (IndexOutOfBoundsException e){
+        System.out.println("Pacijent sa tim imenom ne postoji u rasporedu!");
 
+      } catch (SmartDentistException e){
+        System.out.println("Greska. Pokusajte opet");
       }
-    }
+    } else if(cl.hasOption(dajSveMaterijaleIzSkladista.getOpt()) || cl.hasOption(dajSvePacijenteIzRasporeda.getLongOpt())){
+      RasporedManager.getAll().forEach(n-> System.out.println(n.getIme()));
+    } else if(cl.hasOption(dodajMaterijaluSkladiste.getOpt()) || cl.hasOption(dodajMaterijaluSkladiste.getLongOpt())){
+      try{
+        Materijali m = new Materijali();
+        m.setNaziv(cl.getArgList().get(0));
+        m.setKoličina(Integer.parseInt(cl.getArgList().get(1)));
+        MaterijaliManager.add(m);
+        System.out.println("Stavka uspjesno dodana u skladiste!");
+      } catch (Exception e){
+        System.out.println("Greska. Pokusajte opet.");
+      }
+    }else if (cl.hasOption(obrisiMaterijalIzSkladista.getOpt() ) || cl.hasOption(obrisiMaterijalIzSkladista.getLongOpt())){
+      Materijali m = new Materijali();
+      try{
+        m = MaterijaliManager.getByName(cl.getArgList().get(0));
+        RasporedManager.delete(m.getId());
+        System.out.println("Stavka uspjesno obirsana iz rasporeda");
+      } catch (IndexOutOfBoundsException e){
+        System.out.println("Pacijent sa tim imenom ne postoji u rasporedu!");
+
+      } catch (SmartDentistException e){
+        System.out.println("Greska. Pokusajte opet");
+      }
   }
 
 }

@@ -14,4 +14,6 @@ public interface NarudzbePacijenataDao extends Dao<NarudzbePacijenata>{
 
  public List<NarudzbePacijenata> getByDate(LocalDate date) throws SmartDentistException;
 
+ public NarudzbePacijenata getByName(String name) throws SmartDentistException;
+
 }
