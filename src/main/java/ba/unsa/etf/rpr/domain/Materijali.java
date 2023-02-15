@@ -2,6 +2,11 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
 
+/**
+ * Contains all information about Materijali in SmartDentist app
+ * Bean for Materijali
+ * @author vmujic1
+ */
 public class Materijali implements Idable {
 
     private int id;
