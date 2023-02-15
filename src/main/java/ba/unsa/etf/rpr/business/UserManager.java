@@ -25,6 +25,10 @@ public class UserManager {
         DaoFactory.userDao().delete(id);
     }
 
+    public void update(User u) throws SmartDentistException{
+        DaoFactory.userDao().update(u);
+    }
+
 
 
 }
