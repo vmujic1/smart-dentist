@@ -7,11 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import static javafx.application.Application.launch;
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 /**
- * author Vedran Mujic
+ * Main class for JavaFX framework
+ * extends Application class
+ * @author vmujic1
  *
  */
 public class AppFX extends Application {
