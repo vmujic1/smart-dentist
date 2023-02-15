@@ -30,6 +30,20 @@ public class MaterijaliUrediController {
         kolicnaId.setText(String.valueOf(novi.getKoličina()));
     }
     public void urediOnClick(ActionEvent actionEvent) throws SmartDentistException {
+        if(nazivId.getText().isEmpty() || kolicnaId.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText(null);
+            alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
+            alert.showAndWait();
+        } else if(Integer.parseInt(kolicnaId.getText()) < 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText(null);
+            alert.setContentText("Unijeli ste pogresnu kolicinu!");
+            alert.showAndWait();
+
+        } else{
         Materijali novi = new Materijali();
         novi.setNaziv(nazivId.getText());
         novi.setKoličina(Integer.parseInt(kolicnaId.getText()));
@@ -42,7 +56,7 @@ public class MaterijaliUrediController {
         alert.showAndWait();
         Stage os = (Stage) nazivId.getScene().getWindow();
         openDialog("Skladiste materijala", "/fxml/materijali_main.fxml", null);
-        os.close();
+        os.close();}
     }
     private void openDialog(String title, String file, Object controller){
         try {

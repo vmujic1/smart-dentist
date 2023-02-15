@@ -36,7 +36,7 @@ public class MaterijaliDodajController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greska");
             alert.setHeaderText(null);
-            alert.setContentText("Unijeli ste kolicinu manju od 0.");
+            alert.setContentText("Unijeli ste pogresnu kolicinu");
             alert.showAndWait();
 
         }else{
