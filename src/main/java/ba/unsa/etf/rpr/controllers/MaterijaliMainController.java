@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.MaterijaliManager;
-import ba.unsa.etf.rpr.business.RasporedManager;
 import ba.unsa.etf.rpr.domain.Materijali;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
@@ -20,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
@@ -35,7 +33,7 @@ public class MaterijaliMainController {
 
     public static Materijali materijal;
 
-    MaterijaliManager materijaliManager = new MaterijaliManager();
+    public static MaterijaliManager materijaliManager = new MaterijaliManager();
     private ObservableList<Materijali> filtriranRezultat = FXCollections.observableArrayList();
 
     @FXML
@@ -122,8 +120,9 @@ public class MaterijaliMainController {
     }
 
     public void odjaviSeOnAction(ActionEvent actionEvent) {
-        openDialog("Prijava","/fxml/login.fxml",null);
         Stage os = (Stage) tabelaId.getScene().getWindow();
+        openDialog("Prijava","/fxml/login.fxml",null);
+
         os.close();
 
     }

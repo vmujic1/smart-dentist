@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.Dao.DaoFactory;
+import ba.unsa.etf.rpr.business.MaterijaliManager;
 import ba.unsa.etf.rpr.domain.Materijali;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import javafx.event.ActionEvent;
@@ -21,6 +21,8 @@ public class MaterijaliUrediController {
     public Button odustaniId;
     public TextField nazivId;
     public TextField kolicnaId;
+
+    MaterijaliManager materijaliManager = new MaterijaliManager();
 
     @FXML
     public void initialize() throws SmartDentistException {
@@ -48,7 +50,7 @@ public class MaterijaliUrediController {
         novi.setNaziv(nazivId.getText());
         novi.setKoličina(Integer.parseInt(kolicnaId.getText()));
         novi.setId(MaterijaliMainController.posalji().getId());
-        DaoFactory.materijaliDao().update(novi);
+        MaterijaliManager.update(novi);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Uspjesno!");
         alert.setHeaderText(null);
