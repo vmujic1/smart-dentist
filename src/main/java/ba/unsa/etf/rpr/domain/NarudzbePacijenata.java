@@ -1,8 +1,12 @@
 package ba.unsa.etf.rpr.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
+
+/**
+ * Contains all information about NarudzbePacijenata for SmartDentist app
+ * @author vmujic1
+ */
 
 public class NarudzbePacijenata implements Idable {
 
