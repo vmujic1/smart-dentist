@@ -15,11 +15,16 @@ public class HomeController {
     public Button rasporedId;
 
     public void rasporedPacijenataOnClick(ActionEvent actionEvent) {
+        Stage os = (Stage)rasporedId.getScene().getWindow();
         openDialog("Raspored pacijenata","/fxml/raspored_main.fxml",null);
+        os.close();
     }
 
     public void skladisteMaterijalaOnClick(ActionEvent actionEvent) {
+        Stage os = (Stage)rasporedId.getScene().getWindow();
         openDialog("Skladiste materijala", "/fxml/materijali_main.fxml",null);
+        os.close();
+
     }
 
     private void openDialog(String title, String file, Object controller){
