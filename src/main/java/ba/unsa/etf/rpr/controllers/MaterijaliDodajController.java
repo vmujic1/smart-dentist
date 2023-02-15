@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.business.MaterijaliManager;
-import ba.unsa.etf.rpr.business.RasporedManager;
 import ba.unsa.etf.rpr.domain.Materijali;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import javafx.event.ActionEvent;
@@ -24,6 +23,12 @@ public class MaterijaliDodajController {
     public TextField kolicnaId;
 
     MaterijaliManager materijaliManager = new MaterijaliManager();
+
+    public boolean daLiJeKolicinaIspravna(Materijali m) throws SmartDentistException{
+        if(m.getKoličina() <= 0 ) return false;
+
+        return true;
+    }
 
     public void dodajOnClick(ActionEvent actionEvent) throws SmartDentistException {
         if(nazivId.getText().isEmpty() || kolicnaId.getText().isEmpty()){
