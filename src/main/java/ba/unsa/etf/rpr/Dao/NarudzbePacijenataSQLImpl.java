@@ -85,7 +85,7 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
 
         NarudzbePacijenata pacijent = new NarudzbePacijenata();
         try{
-            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM user WHERE ime = ? ");
+            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM narudzbe_pacijenata WHERE ime = ? ");
             stmt.setString(1,name);
             ResultSet rs = stmt.executeQuery();
 
