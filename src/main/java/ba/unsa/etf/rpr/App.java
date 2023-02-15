@@ -1,3 +1,5 @@
+package ba.unsa.etf.rpr;
+
 import ba.unsa.etf.rpr.business.MaterijaliManager;
 import ba.unsa.etf.rpr.business.RasporedManager;
 import ba.unsa.etf.rpr.domain.Materijali;
@@ -76,7 +78,9 @@ public class App {
         System.out.println("Greska. Pokusajte opet");
       }
     } else if (cl.hasOption(dajSveMaterijaleIzSkladista.getOpt()) || cl.hasOption(dajSvePacijenteIzRasporeda.getLongOpt())) {
-      RasporedManager.getAll().forEach(n -> System.out.println(n.getIme()));
+      NarudzbePacijenata n1 = new NarudzbePacijenata();
+
+      RasporedManager.getAll().forEach(n-> System.out.println(n1.getIme()));
     } else if (cl.hasOption(dodajMaterijaluSkladiste.getOpt()) || cl.hasOption(dodajMaterijaluSkladiste.getLongOpt())) {
       try {
         Materijali m = new Materijali();
