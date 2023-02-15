@@ -32,7 +32,14 @@ public class MaterijaliDodajController {
             alert.setHeaderText(null);
             alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
             alert.showAndWait();
-        } else{
+        }else if(Integer.parseInt(kolicnaId.getText()  ) <= 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText(null);
+            alert.setContentText("Unijeli ste kolicinu manju od 0.");
+            alert.showAndWait();
+
+        }else{
             Materijali novi = new Materijali();
             novi.setNaziv(nazivId.getText());
             novi.setKoličina(Integer.parseInt(kolicnaId.getText()));
