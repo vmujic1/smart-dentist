@@ -19,6 +19,11 @@ public class RasporedManagerTest {
 
     RasporedManager rasporedManager = new RasporedManager();
 
+    /**
+     * Test that checks add in narudzbe_materijala method
+     * @throws SmartDentistException
+     */
+
     @Test
     void addRasporedTest() throws SmartDentistException{
         NarudzbePacijenata n = new NarudzbePacijenata();
@@ -35,6 +40,11 @@ public class RasporedManagerTest {
         }
         Assertions.assertTrue(kontrola);
     }
+
+    /**
+     * Test that checks getByDate from narudzbe_materijala method
+     * @throws SmartDentistException
+     */
 
     @Test
 
@@ -55,6 +65,11 @@ public class RasporedManagerTest {
 
     }
 
+    /**
+     * Test that checks getByName from narudzbe_materijala method
+     * @throws SmartDentistException
+     */
+
     @Test
 
     void getByNameRasporedTest() throws SmartDentistException{
@@ -70,6 +85,11 @@ public class RasporedManagerTest {
 
 
     }
+
+    /**
+     * Test that checks  getAll from narudzbe_materijala  method
+     * @throws SmartDentistException
+     */
 
     @Test
 
@@ -91,6 +111,11 @@ public class RasporedManagerTest {
 
 
     }
+
+    /**
+     * Test that checks delete from narudzbe_materijala method
+     * @throws SmartDentistException
+     */
     @Test
 
     void deleteRasporedTest() throws  SmartDentistException{
