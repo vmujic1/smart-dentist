@@ -1,4 +1,33 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exceptions.SmartDentistException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 public class UserManagerTest {
+
+    UserManager userManager = new UserManager();
+
+    @Test
+    void getByUsernameTest() throws SmartDentistException{
+        User u1 = new User();
+        u1.setUsername("Vedran");
+        u1.setLozinka("sifra");
+        u1.setBroj_zaposlenih("1");
+        u1.setEmail("ww");
+        u1.setKontakt_telefon("121");
+        u1.setBroj_poslovnica("1");
+        u1.setImeOrdinacije("wowo");
+        u1.setAdresa("grge");
+        userManager.add(u1);
+        User u2 = userManager.getByUsername("Vedran");
+        Assertions.assertEquals(u1,u2);
+        userManager.delete(u1.getId());
+    }
+
+
+
+
 }

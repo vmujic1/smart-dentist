@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.business;
 
-import ba.unsa.etf.rpr.Dao.Dao;
 import ba.unsa.etf.rpr.Dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
@@ -20,6 +19,10 @@ public class UserManager {
     public List<User> getAll() throws SmartDentistException{
         return DaoFactory.userDao().getAll();
 
+    }
+
+    public void delete(int id) throws SmartDentistException{
+        DaoFactory.userDao().delete(id);
     }
 
 
