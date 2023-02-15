@@ -39,6 +39,7 @@ public class MaterijaliManagerTest {
     void addMaterijaliTest() throws SmartDentistException{
         Materijali m = new Materijali();
         m.setNaziv("Proba");
+        m.setKoličina(Integer.parseInt("12"));
         materijaliManager.add(m);
         List<Materijali> lista = materijaliManager.getAll();
 
@@ -48,6 +49,26 @@ public class MaterijaliManagerTest {
         }
         materijaliManager.delete(m.getId());
     }
+
+    @Test
+    void deleteMaterijaliTest() throws  SmartDentistException{
+        Materijali m = new Materijali();
+        m.setNaziv("Proba");
+        m.setKoličina(Integer.parseInt("12"));
+
+        MaterijaliManager.add(m);
+        MaterijaliManager.delete(m.getId());
+        boolean kontrola = true;
+        List<Materijali> lista = MaterijaliManager.getAll();
+        for(Materijali u : lista){
+            if(u.getId() == m.getId()) kontrola = false;
+        }
+
+        Assertions.assertTrue(kontrola);
+
+    }
+
+
 
 
 
