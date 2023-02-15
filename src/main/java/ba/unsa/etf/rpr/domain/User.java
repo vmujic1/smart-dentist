@@ -2,6 +2,11 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
 
+/**
+ * Contains all information about User for SmartDentist app
+ * @author vmujic1
+ */
+
 public class User implements Idable {
 
     private int id;
