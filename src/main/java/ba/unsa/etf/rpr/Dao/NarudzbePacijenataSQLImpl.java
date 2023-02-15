@@ -65,7 +65,7 @@ public class NarudzbePacijenataSQLImpl extends AbstractDao<NarudzbePacijenata> i
         List<NarudzbePacijenata> listaDnevna = new ArrayList<>();
         NarudzbePacijenata n = new NarudzbePacijenata();
         try{
-            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM user WHERE datum = ? ");
+            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM narudzbe_pacijenata WHERE datum = ? ");
             stmt.setString(1, String.valueOf(date));
             ResultSet rs = stmt.executeQuery();
 
