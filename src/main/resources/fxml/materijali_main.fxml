@@ -6,14 +6,17 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="555.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.MaterijaliMainController">
+<GridPane prefHeight="555.0" prefWidth="774.0" style="-fx-background-color: #003668;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.MaterijaliMainController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="564.0" minWidth="10.0" prefWidth="510.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="490.0" />
@@ -37,7 +40,7 @@
             </TableView>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0d72a8;" GridPane.columnSpan="2">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #003668;" GridPane.columnSpan="2">
          <children>
             <Label textFill="WHITE">
                <font>
@@ -46,58 +49,75 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" maxHeight="62.0" maxWidth="1000.0" minHeight="62.0" minWidth="62.0" prefHeight="60.0" prefWidth="1000.0" style="-fx-background-color: #0d72a8;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+      <HBox alignment="CENTER_RIGHT" maxHeight="62.0" maxWidth="1000.0" minHeight="62.0" minWidth="62.0" prefHeight="60.0" prefWidth="1000.0" style="-fx-background-color: #003668;" GridPane.columnSpan="2" GridPane.rowIndex="1">
          <children>
-            <TextField fx:id="pretragaId" promptText="Pretrazi skladiste" style="-fx-background-color: #003668;">
+            <TextField fx:id="pretragaId" onKeyPressed="#onEnterPresed" promptText="Pretrazi skladiste" style="-fx-background-color: #ffffff;">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
             </TextField>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="754.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <HBox alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="754.0" style="-fx-background-color: #003668;" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets right="20.0" />
          </GridPane.margin>
       </HBox>
-      <VBox alignment="CENTER" prefHeight="478.0" prefWidth="397.0" style="-fx-background-color: #0d72a8;" GridPane.rowSpan="4">
+      <VBox alignment="TOP_CENTER" prefHeight="478.0" prefWidth="397.0" style="-fx-background-color: #003668;" GridPane.rowSpan="4">
          <children>
-            <Label text="Pregled materijala" textFill="#001d36" underline="true">
+            <HBox alignment="CENTER" prefHeight="164.0" prefWidth="341.0" style="-fx-background-color: #003668;">
+               <children>
+                  <ImageView fitHeight="84.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #003668;">
+                     <image>
+                        <Image url="@../img/warehouse.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Line endX="100.0" startX="-100.0" strokeWidth="2.0" />
+            <Button mnemonicParsing="false" onAction="#dodajuTabeluOnAction" prefHeight="25.0" prefWidth="147.0" style="-fx-background-color: #fffff;" text="Dodaj u tabelu">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#urediIzTabeleAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="Uredi iz tabele">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="12.0" />
                </font>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#dodajuTabeluOnAction" prefHeight="25.0" prefWidth="147.0" style="-fx-background-radius: 5em; -fx-background-color: #003668;" text="Dodaj u tabelu" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="110.0" />
-               </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#urediIzTabeleAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-radius: 5em; -fx-background-color: #003668;" text="Uredi iz tabele" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#obrisiIzTabeleAction" prefHeight="25.0" prefWidth="153.0" style="-fx-background-color: #ffffff;" text="Obrisi iz tabele">
                <VBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#obrisiIzTabeleAction" prefHeight="25.0" prefWidth="153.0" style="-fx-background-radius: 5em; -fx-background-color: #003668;" text="Obrisi iz tabele" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
          </children>
       </VBox>
-      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="774.0" style="-fx-background-color: #0d72a8;" GridPane.columnSpan="2" GridPane.rowIndex="4">
+      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="774.0" style="-fx-background-color: #003668;" GridPane.columnSpan="2" GridPane.rowIndex="4">
          <children>
-            <Button mnemonicParsing="false" onAction="#odjaviSeOnAction" prefHeight="25.0" prefWidth="210.0" style="-fx-background-color: #003668; -fx-background-radius: 5em;" text="Odjavi se" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#odjaviSeOnAction" prefHeight="25.0" prefWidth="210.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5em;" text="Odjavi se">
                <HBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="50.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#rasporedPacijenataOnAction" prefHeight="25.0" prefWidth="210.0" style="-fx-background-color: #003668; -fx-background-radius: 5em;" text="Raspored pacijenata" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#rasporedPacijenataOnAction" prefHeight="25.0" prefWidth="210.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5em;" text="Raspored pacijenata">
                <HBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="50.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Button>
          </children>
       </HBox>
