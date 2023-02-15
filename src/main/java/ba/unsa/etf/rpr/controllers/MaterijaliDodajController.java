@@ -71,5 +71,8 @@ public class MaterijaliDodajController {
     }
 
     public void odustaniOnClick(ActionEvent actionEvent) {
+        Stage os = (Stage)kolicnaId.getScene().getWindow();
+        openDialog("Pregled materijala", "/fxml/materijali_main.fxml",null);
+        os.close();
     }
 }
