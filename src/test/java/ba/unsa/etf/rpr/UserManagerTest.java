@@ -8,10 +8,19 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+/**
+ * Class that provides test for UserManager
+ * @author vmujic1
+ */
+
 public class UserManagerTest {
 
     UserManager userManager = new UserManager();
 
+    /**
+     * Test that checks getByUsername method
+     * @throws SmartDentistException
+     */
     @Test
     void getByUsernameTest() throws SmartDentistException{
         User u1 = new User();
@@ -29,6 +38,10 @@ public class UserManagerTest {
         userManager.delete(u1.getId());
     }
 
+    /**
+     * Test that checks deleteUser method
+     * @throws SmartDentistException
+     */
     @Test
 
     void deleteUserTest() throws  SmartDentistException{
@@ -54,6 +67,10 @@ public class UserManagerTest {
 
     }
 
+    /**
+     * Test that checks addUser method
+     * @throws SmartDentistException
+     */
     @Test
 
     void addUserTest() throws SmartDentistException{
@@ -77,6 +94,11 @@ public class UserManagerTest {
 
     }
 
+    /**
+     * Test that checks update method
+     * @throws SmartDentistException
+     */
+
     @Test
     void userUpdateTest() throws SmartDentistException{
         User u1 = new User();
@@ -99,6 +121,36 @@ public class UserManagerTest {
         }
 
         Assertions.assertTrue(kontrola);
+
+    }
+
+    /**
+     * Test that checks getAll method
+     * @throws SmartDentistException
+     */
+
+    @Test
+
+    void userGetAllTest() throws SmartDentistException{
+        List<User> lista = userManager.getAll();
+        User u1 = new User();
+        u1.setUsername("Vedran");
+        u1.setLozinka("sifra");
+        u1.setBroj_zaposlenih("1a");
+        u1.setEmail("waw");
+        u1.setKontakt_telefon("12a1");
+        u1.setBroj_poslovnica("1a");
+        u1.setImeOrdinacije("wowoa");
+        u1.setAdresa("grgae");
+        userManager.add(u1);
+        List<User> lista1 = userManager.getAll();
+        userManager.delete(u1.getId());
+        boolean kontrola = false;
+        if(lista.size() + 1 == lista1.size()) kontrola = true;
+
+        Assertions.assertTrue(kontrola);
+
+
 
     }
 
