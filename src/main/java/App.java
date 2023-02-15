@@ -27,4 +27,15 @@ public class App {
     printWriter.close();
   }
 
+  public static Options addOptions() {
+    Options options = new Options();
+    options.addOption(dodajPacijentauRaspored);
+    options.addOption(obrisiPacijentaIzRasporeda);
+    options.addOption(dajSvePacijenteIzRasporeda);
+    options.addOption(dodajMaterijaluSkladiste);
+    options.addOption(obrisiMaterijalIzSkladista);
+    options.addOption(dajSveMaterijaleIzSkladista);
+    return options;
+  }
+
 }
