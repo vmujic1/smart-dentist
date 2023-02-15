@@ -6,6 +6,8 @@ import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class UserManagerTest {
 
     UserManager userManager = new UserManager();
@@ -25,6 +27,31 @@ public class UserManagerTest {
         User u2 = userManager.getByUsername("Vedran");
         Assertions.assertEquals(u1,u2);
         userManager.delete(u1.getId());
+    }
+
+    @Test
+
+    void deleteUserTest() throws  SmartDentistException{
+        User u1 = new User();
+        u1.setUsername("Vedran");
+        u1.setLozinka("sifra");
+        u1.setBroj_zaposlenih("1a");
+        u1.setEmail("waw");
+        u1.setKontakt_telefon("12a1");
+        u1.setBroj_poslovnica("1a");
+        u1.setImeOrdinacije("wowoa");
+        u1.setAdresa("grgae");
+
+        userManager.add(u1);
+        userManager.delete(u1.getId());
+        boolean kontrola = true;
+        List<User> lista = userManager.getAll();
+        for(User u : lista){
+            if(u.getId() == u1.getId()) kontrola = false;
+        }
+
+        Assertions.assertTrue(kontrola);
+
     }
 
 
