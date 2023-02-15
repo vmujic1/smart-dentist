@@ -8,10 +8,19 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * Abstract class that implements basic DAO CRUD for every entity
+ * @author vmujic1
+ */
 public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
 
     private Connection connection;
     private  String tableName;
+
+    /**
+     * Constructor for AbstractDao that sets connection name and calls specific method to create connection
+     * @param tableName String
+     */
 
     AbstractDao(String tableName){
         try{
@@ -28,14 +37,36 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
         }
     }
 
+    /**
+     * Method that gets connection
+     * @return connection
+     *
+     */
     public Connection getConnection(){
         return connection;
     }
+    /**
+     * Method for mapping ResultSet into Object
+     * @param rs - result set from database
+     * @return a Bean object for specific table
+     * @throws SmartDentistException in case of problem with database
+     */
 
     public abstract Type row2object(ResultSet rs) throws SmartDentistException;
 
+    /**
+     * Method for mapping Object into Map
+     * @param object - a bean object for specific table
+     * @return key, value sorted map of object
+     */
     public abstract Map<String, Object> object2row(Type object);
 
+    /**
+     * Method that returns object with specified ID
+     * @param id primary key of entity
+     * @return object that has specified ID
+     * @throws SmartDentistException
+     */
     public Type getById(int id) throws SmartDentistException{
         String query = "SELECT * FROM " + this.tableName + " WHERE id = ?";
         try {
@@ -56,6 +87,11 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
         }
     }
 
+    /**
+     * Method that returns all objects from table
+     * @return List of object from table
+     * @throws SmartDentistException
+     */
     public List<Type> getAll() throws SmartDentistException{
         String query = "SELECT * FROM " + tableName;
         List<Type> results = new LinkedList<>();
@@ -75,6 +111,11 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
         }
     }
 
+    /**
+     * Method that deletes object from table with specified ID
+     * @param id - primary key of entity
+     * @throws SmartDentistException
+     */
     public void delete(int id) throws SmartDentistException{
         String sql = "DELETE FROM " + tableName + " WHERE id = ?";
 
@@ -87,6 +128,13 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
             throw new SmartDentistException(e.getMessage(), e);
         }
     }
+
+    /**
+     * Method that adds given object in table
+     * @param item bean for saving to database
+     * @return Added object in table
+     * @throws SmartDentistException
+     */
 
     public Type add(Type item) throws SmartDentistException{
         Map<String, Object> row = object2row(item);
@@ -119,6 +167,13 @@ public abstract class AbstractDao <Type extends Idable> implements Dao<Type>{
             throw new SmartDentistException(e.getMessage(), e);
         }
     }
+
+    /**
+     * Method that updates specified object in table
+     * @param item - bean to be updated. id must be populated
+     * @return object bean
+     * @throws SmartDentistException
+     */
 
     public Type update(Type item) throws SmartDentistException{
         Map<String, Object> row = object2row(item);
