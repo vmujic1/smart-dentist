@@ -1,8 +1,11 @@
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
+import ba.unsa.etf.rpr.business.MaterijaliManager;
+import ba.unsa.etf.rpr.business.RasporedManager;
+import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
+import ba.unsa.etf.rpr.exceptions.SmartDentistException;
+import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
+import java.time.LocalDate;
 
 /**
  * CLI(Command Line Interface) impl
@@ -36,6 +39,35 @@ public class App {
     options.addOption(obrisiMaterijalIzSkladista);
     options.addOption(dajSveMaterijaleIzSkladista);
     return options;
+  }
+
+  public static void main(String[] args) throws ParseException, SmartDentistException{
+    Options options = addOptions();
+    CommandLineParser commandLineParser = new DefaultParser();
+    CommandLine cl = commandLineParser.parse(options,args);
+    RasporedManager rm = new RasporedManager();
+    MaterijaliManager mm = new MaterijaliManager();
+
+    if(cl.hasOption(dodajPacijentauRaspored.getOpt()) || cl.hasOption(dodajPacijentauRaspored.getLongOpt())) {
+      try {
+        NarudzbePacijenata n = new NarudzbePacijenata();
+        n.setIme(cl.getArgList().get(0));
+        n.setPrezime(cl.getArgList().get(1));
+        n.setPovod(cl.getArgList().get(2));
+        n.setDatum(LocalDate.parse(cl.getArgList().get(3)));
+        RasporedManager.add(n);
+        System.out.println("Nova stavka uspjesno dodana u raspored!");
+      } catch (Exception e){
+        System.out.println("Greska. Pokusajte opet.");
+        printFormattedOptions(options);
+        System.exit(-1);
+      }
+    } else if (cl.hasOption(obrisiPacijentaIzRasporeda.getOpt() ) || cl.hasOption(obrisiPacijentaIzRasporeda.getLongOpt())){
+      NarudzbePacijenata n = new NarudzbePacijenata();
+      try{
+
+      }
+    }
   }
 
 }
