@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.domain.Materijali;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,11 +14,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
@@ -32,6 +36,7 @@ public class MaterijaliMainController {
     public static Materijali materijal;
 
     MaterijaliManager materijaliManager = new MaterijaliManager();
+    private ObservableList<Materijali> filtriranRezultat = FXCollections.observableArrayList();
 
     @FXML
     public void initialize(){
@@ -130,4 +135,18 @@ public class MaterijaliMainController {
     }
 
 
+    public void onEnterPresed(KeyEvent keyEvent) throws SmartDentistException {
+        if(keyEvent.getCode().equals(KeyCode.ENTER)){
+        List<Materijali> svi = MaterijaliManager.getAll();
+        if(!filtriranRezultat.isEmpty()) filtriranRezultat.clear();
+        if(keyEvent.getCode().equals(KeyCode.ENTER)){
+            for(Materijali m : svi){
+                if(m.getNaziv().equals(pretragaId.getText()) )
+                    filtriranRezultat.add(m);
+            }
+        }
+        if(!pretragaId.getText().isEmpty()){
+
+        tabelaId.setItems(filtriranRezultat);} else popuniTabelu();
+    }}
 }

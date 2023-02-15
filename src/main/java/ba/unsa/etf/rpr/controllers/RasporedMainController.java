@@ -14,12 +14,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Date;
 import java.util.List;
+
+import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class RasporedMainController {
     public Button dodajId;
@@ -141,8 +144,26 @@ public class RasporedMainController {
         popuniTabelu();
         tabelaId.refresh();
     }
+    private void openDialog(String title, String file, Object controller){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
+            loader.setController(controller);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setTitle(title);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setResizable(false);
+            stage.show();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+        }
+    }
 
     public void odjaviSeOnClick(ActionEvent actionEvent) {
+        Stage s = (Stage)tabelaId.getScene().getWindow();
+        openDialog("Prijava","/fxml/login.fxml",null);
+        s.close();
+
     }
 
     public void pregledMaterijalaOnClick(ActionEvent actionEvent) {
