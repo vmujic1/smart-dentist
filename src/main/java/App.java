@@ -1,4 +1,8 @@
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+
+import java.io.PrintWriter;
 
 /**
  * CLI(Command Line Interface) impl
@@ -14,4 +18,13 @@ public class App {
   private static final Option obrisiMaterijalIzSkladista = new Option("obrisiM", "obrisi-materijal-skladiste",false,"Brisanje materijala iz skladista");
   private static final Option dajSveMaterijaleIzSkladista = new Option("dajSveM", "daj-materijale",false,"Vracanje svih materijala iz skladista");
 
+
+  public static void printFormattedOptions(Options options) {
+    HelpFormatter helpFormatter = new HelpFormatter();
+    PrintWriter printWriter = new PrintWriter(System.out);
+    helpFormatter.printUsage(printWriter, 150, "java -jar smart-dentist-cli-jar-with-dependencies.jar [option] (parameters)");
+    helpFormatter.printOptions(printWriter, 150, options, 2, 7);
+    printWriter.close();
   }
+
+}
