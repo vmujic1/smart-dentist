@@ -122,14 +122,14 @@ public class MaterijaliMainController {
     }
 
     public void odjaviSeOnAction(ActionEvent actionEvent) {
-        openDialog("Prijava","/fxml/login.fxml","null");
+        openDialog("Prijava","/fxml/login.fxml",null);
         Stage os = (Stage) tabelaId.getScene().getWindow();
         os.close();
 
     }
 
     public void rasporedPacijenataOnAction(ActionEvent actionEvent) {
-        openDialog("Raspored","/fxml/raspored_main.fxml","null");
+        openDialog("Raspored","/fxml/raspored_main.fxml",null);
         Stage os = (Stage) tabelaId.getScene().getWindow();
         os.close();
     }
