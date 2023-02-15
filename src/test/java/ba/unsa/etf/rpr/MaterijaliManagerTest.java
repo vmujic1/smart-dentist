@@ -34,6 +34,20 @@ public class MaterijaliManagerTest {
 
 
     }
+    @Test
+
+    void addMaterijaliTest() throws SmartDentistException{
+        Materijali m = new Materijali();
+        m.setNaziv("Proba");
+        materijaliManager.add(m);
+        List<Materijali> lista = materijaliManager.getAll();
+
+        boolean kontrola = false;
+        for(Materijali u : lista){
+            if(u.getId() == m.getId()) kontrola = true;
+        }
+        materijaliManager.delete(m.getId());
+    }
 
 
 
