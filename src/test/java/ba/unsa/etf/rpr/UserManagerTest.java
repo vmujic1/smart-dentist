@@ -54,6 +54,31 @@ public class UserManagerTest {
 
     }
 
+    @Test
+
+    void addUserTest() throws SmartDentistException{
+        User u1 = new User();
+        u1.setUsername("Vedran");
+        u1.setLozinka("sifra");
+        u1.setBroj_zaposlenih("1a");
+        u1.setEmail("waw");
+        u1.setKontakt_telefon("12a1");
+        u1.setBroj_poslovnica("1a");
+        u1.setImeOrdinacije("wowoa");
+        u1.setAdresa("grgae");
+        userManager.add(u1);
+        List<User> lista = userManager.getAll();
+        boolean kontrola = false;
+        for(User u : lista){
+            if(u.getId() == u1.getId()) kontrola = true;
+        }
+        userManager.delete(u1.getId());
+    }
+
+    void updateUserTest() throws  SmartDentistException{
+
+    }
+
 
 
 
