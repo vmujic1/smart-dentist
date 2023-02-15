@@ -24,8 +24,8 @@ public class MaterijaliDodajController {
 
     MaterijaliManager materijaliManager = new MaterijaliManager();
 
-    public boolean daLiJeKolicinaIspravna(Materijali m) throws SmartDentistException{
-        if(m.getKoličina() <= 0 ) return false;
+    public static boolean daLiJeKolicinaIspravna(int m) {
+        if(m <= 0 ) return false;
 
         return true;
     }
@@ -37,7 +37,7 @@ public class MaterijaliDodajController {
             alert.setHeaderText(null);
             alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
             alert.showAndWait();
-        }else if(Integer.parseInt(kolicnaId.getText()  ) <= 0){
+        }else if(!daLiJeKolicinaIspravna(Integer.parseInt(kolicnaId.getText()))){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greska");
             alert.setHeaderText(null);

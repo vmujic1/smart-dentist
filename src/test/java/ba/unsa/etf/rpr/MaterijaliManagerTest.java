@@ -1,10 +1,12 @@
 package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.business.MaterijaliManager;
+import ba.unsa.etf.rpr.controllers.MaterijaliDodajController;
 import ba.unsa.etf.rpr.domain.Materijali;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -28,11 +30,10 @@ public class MaterijaliManagerTest {
         Materijali m = new Materijali();
         m.setNaziv("Proba");
         m.setKoličina(Integer.parseInt("12"));
-        materijaliManager.add(m);
+        MaterijaliManager.add(m);
         List<Materijali> lista1 = MaterijaliManager.getAll();
-        materijaliManager.delete(m.getId());
-        boolean kontrola = false;
-        if(lista.size() + 1 == lista1.size()) kontrola = true;
+        MaterijaliManager.delete(m.getId());
+        boolean kontrola = lista.size() + 1 == lista1.size();
 
         Assertions.assertTrue(kontrola);
 
@@ -50,14 +51,17 @@ public class MaterijaliManagerTest {
         Materijali m = new Materijali();
         m.setNaziv("Proba");
         m.setKoličina(Integer.parseInt("12"));
-        materijaliManager.add(m);
-        List<Materijali> lista = materijaliManager.getAll();
+        MaterijaliManager.add(m);
+        List<Materijali> lista = MaterijaliManager.getAll();
 
         boolean kontrola = false;
         for(Materijali u : lista){
-            if(u.getId() == m.getId()) kontrola = true;
+            if (u.getId() == m.getId()) {
+                kontrola = true;
+                break;
+            }
         }
-        materijaliManager.delete(m.getId());
+        MaterijaliManager.delete(m.getId());
     }
 
     /**
@@ -76,7 +80,10 @@ public class MaterijaliManagerTest {
         boolean kontrola = true;
         List<Materijali> lista = MaterijaliManager.getAll();
         for(Materijali u : lista){
-            if(u.getId() == m.getId()) kontrola = false;
+            if (u.getId() == m.getId()) {
+                kontrola = false;
+                break;
+            }
         }
 
         Assertions.assertTrue(kontrola);
@@ -100,7 +107,10 @@ public class MaterijaliManagerTest {
         MaterijaliManager.delete(m.getId());
         boolean kontrola = false;
         for(Materijali u : lista){
-            if(u.getId() == m.getId() && u.getNaziv().equals(m.getNaziv())) kontrola = true;
+            if (u.getId() == m.getId() && u.getNaziv().equals(m.getNaziv())) {
+                kontrola = true;
+                break;
+            }
         }
 
         Assertions.assertTrue(kontrola);
@@ -122,5 +132,12 @@ public class MaterijaliManagerTest {
         Materijali m2 = MaterijaliManager.getByName(m.getNaziv());
         Assertions.assertEquals(m,m2);
         MaterijaliManager.delete(m.getId());
+    }
+    @Test
+    void kolicinaIspravnaTest() throws SmartDentistException{
+        MaterijaliManager mockU = Mockito.mock(MaterijaliManager.class);
+        Mockito.when(mockU.getById(0)).thenReturn(new Materijali("lol",5));
+        Assertions.assertTrue(MaterijaliDodajController.daLiJeKolicinaIspravna(mockU.getById(0).getKoličina()));
+
     }
 }

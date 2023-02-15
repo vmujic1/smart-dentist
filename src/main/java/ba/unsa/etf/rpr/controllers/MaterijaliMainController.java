@@ -36,6 +36,12 @@ public class MaterijaliMainController {
     public static MaterijaliManager materijaliManager = new MaterijaliManager();
     private ObservableList<Materijali> filtriranRezultat = FXCollections.observableArrayList();
 
+    public static boolean daLiJeKolicinaIspravna(int m) throws SmartDentistException{
+        if(m <= 0 ) return false;
+
+        return true;
+    }
+
     @FXML
     public void initialize(){
         idKolonaId.setCellValueFactory(new PropertyValueFactory<Materijali,Integer>("id"));
@@ -77,7 +83,7 @@ public class MaterijaliMainController {
         stage.setScene(new Scene(root1));
         stage.setResizable(false);
         stage.show();
-        popuniTabelu();
+        tabelaId.refresh();
     }
 
     public static Materijali posalji() throws  SmartDentistException{

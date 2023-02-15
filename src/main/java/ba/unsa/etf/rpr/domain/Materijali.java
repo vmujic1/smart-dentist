@@ -22,6 +22,11 @@ public class Materijali implements Idable {
     public Materijali() {
     }
 
+    public Materijali(String ime, int i) {
+        this.naziv = ime;
+        this.količina = i;
+    }
+
     public int getId() {
         return id;
     }
