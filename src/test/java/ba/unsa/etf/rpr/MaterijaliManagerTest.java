@@ -16,6 +16,11 @@ import java.util.List;
 
 public class MaterijaliManagerTest {
     MaterijaliManager materijaliManager = new MaterijaliManager();
+
+    /**
+     * Test that checks getAll method from narudzbe_materijala
+     * @throws SmartDentistException
+     */
     @Test
 
     void materijaliGetAllTest() throws SmartDentistException {
@@ -34,6 +39,11 @@ public class MaterijaliManagerTest {
 
 
     }
+
+    /**
+     * Test that checks add method from narudzbe_materijala
+     * @throws SmartDentistException
+     */
     @Test
 
     void addMaterijaliTest() throws SmartDentistException{
@@ -49,6 +59,11 @@ public class MaterijaliManagerTest {
         }
         materijaliManager.delete(m.getId());
     }
+
+    /**
+     * Test that checks delete method from narudzbe_materijala
+     * @throws SmartDentistException
+     */
 
     @Test
     void deleteMaterijaliTest() throws  SmartDentistException{
@@ -68,6 +83,10 @@ public class MaterijaliManagerTest {
 
     }
 
+    /**
+     * Test that checks update method from narudzbe_materijala
+     * @throws SmartDentistException
+     */
     @Test
     void materijaliUpdateTest() throws SmartDentistException{
         Materijali m = new Materijali();
@@ -88,10 +107,20 @@ public class MaterijaliManagerTest {
 
     }
 
+    /**
+     * Test that checks getByNaziv method from narudzbe_materijala
+     * @throws SmartDentistException
+     */
 
+    @Test
+    void getByNazivTest() throws SmartDentistException{
+        Materijali m = new Materijali();
+        m.setNaziv("Proba");
+        m.setKoličina(Integer.parseInt("12"));
 
-
-
-
-
+        MaterijaliManager.add(m);
+        Materijali m2 = MaterijaliManager.getByName(m.getNaziv());
+        Assertions.assertEquals(m,m2);
+        MaterijaliManager.delete(m.getId());
+    }
 }
