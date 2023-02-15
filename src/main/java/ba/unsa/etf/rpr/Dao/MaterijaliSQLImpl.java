@@ -3,10 +3,11 @@ package ba.unsa.etf.rpr.Dao;
 import ba.unsa.etf.rpr.domain.Materijali;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.*;
-import java.util.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements MaterijaliDao{
 
@@ -48,5 +49,23 @@ public class MaterijaliSQLImpl extends AbstractDao<Materijali> implements Materi
         row.put("naziv", object.getNaziv());
         row.put("kolicina", object.getKoličina());
         return row;
+    }
+
+    @Override
+    public Materijali getByName(String name) throws SmartDentistException {
+        Materijali m = new Materijali();
+        try{
+            PreparedStatement stmt = this.getConnection().prepareStatement("Select * FROM materijali WHERE naziv = ? ");
+            stmt.setString(1,name);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next()){
+                m = row2object(rs);
+                rs.close();
+            }
+        } catch (SQLException e) {
+            throw new SmartDentistException(e.getMessage(),e);
+        }
+        return m;
     }
 }

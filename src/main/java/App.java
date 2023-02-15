@@ -15,12 +15,12 @@ import java.time.LocalDate;
 public class App {
 
   private static final Option dodajPacijentauRaspored = new Option("dodajP", "dodaj-pacijent-raspored", false, "Dodavanje novog pacijenta u raspored");
-  private static final Option obrisiPacijentaIzRasporeda = new Option("obrisiP", "obrisi-pacijenta-raspored",false,"Brisanje pacijenta iz rasporeda");
-  private static final Option dajSvePacijenteIzRasporeda = new Option("dajSveP", "daj-pacijente",false,"Vracanje svih pacijenata iz rasporeda");
+  private static final Option obrisiPacijentaIzRasporeda = new Option("obrisiP", "obrisi-pacijenta-raspored", false, "Brisanje pacijenta iz rasporeda");
+  private static final Option dajSvePacijenteIzRasporeda = new Option("dajSveP", "daj-pacijente", false, "Vracanje svih pacijenata iz rasporeda");
 
   private static final Option dodajMaterijaluSkladiste = new Option("dodajM", "dodaj-materijal-skladiste", false, "Dodavanje novog materijala u skladiste");
-  private static final Option obrisiMaterijalIzSkladista = new Option("obrisiM", "obrisi-materijal-skladiste",false,"Brisanje materijala iz skladista");
-  private static final Option dajSveMaterijaleIzSkladista = new Option("dajSveM", "daj-materijale",false,"Vracanje svih materijala iz skladista");
+  private static final Option obrisiMaterijalIzSkladista = new Option("obrisiM", "obrisi-materijal-skladiste", false, "Brisanje materijala iz skladista");
+  private static final Option dajSveMaterijaleIzSkladista = new Option("dajSveM", "daj-materijale", false, "Vracanje svih materijala iz skladista");
 
 
   public static void printFormattedOptions(Options options) {
@@ -42,14 +42,14 @@ public class App {
     return options;
   }
 
-  public static void main(String[] args) throws ParseException, SmartDentistException{
+  public static void main(String[] args) throws ParseException, SmartDentistException {
     Options options = addOptions();
     CommandLineParser commandLineParser = new DefaultParser();
-    CommandLine cl = commandLineParser.parse(options,args);
+    CommandLine cl = commandLineParser.parse(options, args);
     RasporedManager rm = new RasporedManager();
     MaterijaliManager mm = new MaterijaliManager();
 
-    if(cl.hasOption(dodajPacijentauRaspored.getOpt()) || cl.hasOption(dodajPacijentauRaspored.getLongOpt())) {
+    if (cl.hasOption(dodajPacijentauRaspored.getOpt()) || cl.hasOption(dodajPacijentauRaspored.getLongOpt())) {
       try {
         NarudzbePacijenata n = new NarudzbePacijenata();
         n.setIme(cl.getArgList().get(0));
@@ -58,47 +58,56 @@ public class App {
         n.setDatum(LocalDate.parse(cl.getArgList().get(3)));
         RasporedManager.add(n);
         System.out.println("Nova stavka uspjesno dodana u raspored!");
-      } catch (Exception e){
+      } catch (Exception e) {
         System.out.println("Greska. Pokusajte opet.");
         printFormattedOptions(options);
         System.exit(-1);
       }
-    } else if (cl.hasOption(obrisiPacijentaIzRasporeda.getOpt() ) || cl.hasOption(obrisiPacijentaIzRasporeda.getLongOpt())){
+    } else if (cl.hasOption(obrisiPacijentaIzRasporeda.getOpt()) || cl.hasOption(obrisiPacijentaIzRasporeda.getLongOpt())) {
       NarudzbePacijenata n = new NarudzbePacijenata();
-      try{
+      try {
         n = RasporedManager.getByName(cl.getArgList().get(0));
         RasporedManager.delete(n.getId());
         System.out.println("Stavka uspjesno obirsana iz rasporeda");
-      } catch (IndexOutOfBoundsException e){
+      } catch (IndexOutOfBoundsException e) {
         System.out.println("Pacijent sa tim imenom ne postoji u rasporedu!");
 
-      } catch (SmartDentistException e){
+      } catch (SmartDentistException e) {
         System.out.println("Greska. Pokusajte opet");
       }
-    } else if(cl.hasOption(dajSveMaterijaleIzSkladista.getOpt()) || cl.hasOption(dajSvePacijenteIzRasporeda.getLongOpt())){
-      RasporedManager.getAll().forEach(n-> System.out.println(n.getIme()));
-    } else if(cl.hasOption(dodajMaterijaluSkladiste.getOpt()) || cl.hasOption(dodajMaterijaluSkladiste.getLongOpt())){
-      try{
+    } else if (cl.hasOption(dajSveMaterijaleIzSkladista.getOpt()) || cl.hasOption(dajSvePacijenteIzRasporeda.getLongOpt())) {
+      RasporedManager.getAll().forEach(n -> System.out.println(n.getIme()));
+    } else if (cl.hasOption(dodajMaterijaluSkladiste.getOpt()) || cl.hasOption(dodajMaterijaluSkladiste.getLongOpt())) {
+      try {
         Materijali m = new Materijali();
         m.setNaziv(cl.getArgList().get(0));
         m.setKoličina(Integer.parseInt(cl.getArgList().get(1)));
         MaterijaliManager.add(m);
         System.out.println("Stavka uspjesno dodana u skladiste!");
-      } catch (Exception e){
+      } catch (Exception e) {
         System.out.println("Greska. Pokusajte opet.");
       }
-    }else if (cl.hasOption(obrisiMaterijalIzSkladista.getOpt() ) || cl.hasOption(obrisiMaterijalIzSkladista.getLongOpt())){
+    } else if (cl.hasOption(obrisiMaterijalIzSkladista.getOpt()) || cl.hasOption(obrisiMaterijalIzSkladista.getLongOpt())) {
       Materijali m = new Materijali();
-      try{
+      try {
         m = MaterijaliManager.getByName(cl.getArgList().get(0));
         RasporedManager.delete(m.getId());
-        System.out.println("Stavka uspjesno obirsana iz rasporeda");
-      } catch (IndexOutOfBoundsException e){
-        System.out.println("Pacijent sa tim imenom ne postoji u rasporedu!");
+        System.out.println("Stavka uspjesno obirsana iz skladista");
+      } catch (IndexOutOfBoundsException e) {
+        System.out.println("Stavka sa tim imenom ne postoji u skladistu!");
 
-      } catch (SmartDentistException e){
+      } catch (SmartDentistException e) {
         System.out.println("Greska. Pokusajte opet");
       }
+    } else if (cl.hasOption(dajSveMaterijaleIzSkladista.getOpt()) || cl.hasOption(dajSveMaterijaleIzSkladista.getLongOpt())) {
+      {
+        RasporedManager.getAll().forEach(m -> System.out.println(m.getIme()));
+      }
+    } else {
+      printFormattedOptions(options);
+      System.exit(-1);
+    }
   }
-
 }
+
+

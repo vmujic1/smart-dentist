@@ -22,4 +22,9 @@ public class MaterijaliManager {
     public static void update(Materijali m) throws SmartDentistException{
         DaoFactory.materijaliDao().update(m);
     }
+
+    public static Materijali getByName(String name) throws SmartDentistException{
+        return DaoFactory.materijaliDao().getByName(name);
+
+    }
 }
