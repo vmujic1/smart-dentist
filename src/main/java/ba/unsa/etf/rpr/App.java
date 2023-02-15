@@ -52,8 +52,9 @@ public class App {
     MaterijaliManager mm = new MaterijaliManager();
 
     if (cl.hasOption(dodajPacijentauRaspored.getOpt()) || cl.hasOption(dodajPacijentauRaspored.getLongOpt())) {
+      NarudzbePacijenata n = new NarudzbePacijenata();
       try {
-        NarudzbePacijenata n = new NarudzbePacijenata();
+
         n.setIme(cl.getArgList().get(0));
         n.setPrezime(cl.getArgList().get(1));
         n.setPovod(cl.getArgList().get(2));
@@ -66,8 +67,9 @@ public class App {
         System.exit(-1);
       }
     } else if (cl.hasOption(obrisiPacijentaIzRasporeda.getOpt()) || cl.hasOption(obrisiPacijentaIzRasporeda.getLongOpt())) {
-      NarudzbePacijenata n = new NarudzbePacijenata();
+
       try {
+        NarudzbePacijenata n = new NarudzbePacijenata();
         n = RasporedManager.getByName(cl.getArgList().get(0));
         RasporedManager.delete(n.getId());
         System.out.println("Stavka uspjesno obirsana iz rasporeda");
@@ -78,9 +80,7 @@ public class App {
         System.out.println("Greska. Pokusajte opet");
       }
     } else if (cl.hasOption(dajSveMaterijaleIzSkladista.getOpt()) || cl.hasOption(dajSvePacijenteIzRasporeda.getLongOpt())) {
-      NarudzbePacijenata n1 = new NarudzbePacijenata();
-
-      RasporedManager.getAll().forEach(n-> System.out.println(n1.getIme()));
+      RasporedManager.getAll().forEach(n-> System.out.println(n.getIme()));
     } else if (cl.hasOption(dodajMaterijaluSkladiste.getOpt()) || cl.hasOption(dodajMaterijaluSkladiste.getLongOpt())) {
       try {
         Materijali m = new Materijali();
@@ -92,11 +92,11 @@ public class App {
         System.out.println("Greska. Pokusajte opet.");
       }
     } else if (cl.hasOption(obrisiMaterijalIzSkladista.getOpt()) || cl.hasOption(obrisiMaterijalIzSkladista.getLongOpt())) {
-      Materijali m = new Materijali();
       try {
-        m = MaterijaliManager.getByName(cl.getArgList().get(0));
-        RasporedManager.delete(m.getId());
+        Materijali m = new Materijali();
+       m = MaterijaliManager.getByName(cl.getArgList().get(0));
         System.out.println("Stavka uspjesno obirsana iz skladista");
+          MaterijaliManager.delete(m.getId());
       } catch (IndexOutOfBoundsException e) {
         System.out.println("Stavka sa tim imenom ne postoji u skladistu!");
 
