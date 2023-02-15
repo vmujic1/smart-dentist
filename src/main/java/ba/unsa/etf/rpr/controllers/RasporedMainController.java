@@ -167,5 +167,9 @@ public class RasporedMainController {
     }
 
     public void pregledMaterijalaOnClick(ActionEvent actionEvent) {
+
+        Stage s = (Stage)tabelaId.getScene().getWindow();
+        openDialog("Skladiste","/fxml/materijali_main.fxml",null);
+        s.close();
     }
 }
