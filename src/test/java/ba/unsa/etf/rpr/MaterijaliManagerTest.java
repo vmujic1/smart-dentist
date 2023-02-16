@@ -133,6 +133,11 @@ public class MaterijaliManagerTest {
         Assertions.assertEquals(m,m2);
         MaterijaliManager.delete(m.getId());
     }
+
+    /**
+     * Mocking test that checks kolicinaIspravna
+     * @throws SmartDentistException
+     */
     @Test
     void kolicinaIspravnaTest() throws SmartDentistException{
         MaterijaliManager mockU = Mockito.mock(MaterijaliManager.class);

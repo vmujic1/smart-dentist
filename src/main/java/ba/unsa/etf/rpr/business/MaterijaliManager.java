@@ -28,7 +28,7 @@ public class MaterijaliManager {
 
     }
 
-    public static Materijali getById(int id) throws SmartDentistException {
+    public Materijali getById(int id) throws SmartDentistException {
         return DaoFactory.materijaliDao().getById(id);
     }
 }
