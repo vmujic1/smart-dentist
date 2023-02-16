@@ -30,34 +30,63 @@ public class MaterijaliDodajController {
         return true;
     }
 
-    public void dodajOnClick(ActionEvent actionEvent) throws SmartDentistException {
-        if(nazivId.getText().isEmpty() || kolicnaId.getText().isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Greska");
-            alert.setHeaderText(null);
-            alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
-            alert.showAndWait();
-        }else if(!daLiJeKolicinaIspravna(Integer.parseInt(kolicnaId.getText()))){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Greska");
-            alert.setHeaderText(null);
-            alert.setContentText("Unijeli ste pogresnu kolicinu");
-            alert.showAndWait();
+    public boolean daLiJeKolicinaBroj(String s){
+        if(s.matches("[0-9]+")) return true;
+        return false;
+    }
 
-        }else{
-            Materijali novi = new Materijali();
-            novi.setNaziv(nazivId.getText());
-            novi.setKoličina(Integer.parseInt(kolicnaId.getText()));
-            MaterijaliManager.add(novi);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Uspjesno!");
-            alert.setHeaderText(null);
-            alert.setContentText("Uspjesno ste dodali novu stavku u skladiste!");
-            alert.showAndWait();
-            Stage os = (Stage) nazivId.getScene().getWindow();
-            os.close();
-            openDialog("Pregled materijala", "/fxml/materijali_main.fxml", null);
-        }
+    public boolean jeLiPrvaCifraNula(String s){
+        if(s.charAt(0) == '0') return true;
+        return false;
+    }
+
+    public void dodajOnClick(ActionEvent actionEvent) throws SmartDentistException {
+
+
+
+
+            if (nazivId.getText().isEmpty() || kolicnaId.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greska");
+                alert.setHeaderText(null);
+                alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
+                alert.showAndWait();
+            } else if(!daLiJeKolicinaBroj(kolicnaId.getText())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greska");
+                alert.setHeaderText(null);
+                alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
+                alert.showAndWait();
+            }else if(jeLiPrvaCifraNula(kolicnaId.getText())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greska");
+                alert.setHeaderText(null);
+                alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
+                alert.showAndWait();
+
+
+        }else if (!daLiJeKolicinaIspravna(Integer.parseInt(kolicnaId.getText()))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greska");
+                alert.setHeaderText(null);
+                alert.setContentText("Unijeli ste pogresnu kolicinu");
+                alert.showAndWait();
+
+            } else {
+                Materijali novi = new Materijali();
+                novi.setNaziv(nazivId.getText());
+                novi.setKoličina(Integer.parseInt(kolicnaId.getText()));
+                MaterijaliManager.add(novi);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Uspjesno!");
+                alert.setHeaderText(null);
+                alert.setContentText("Uspjesno ste dodali novu stavku u skladiste!");
+                alert.showAndWait();
+                Stage os = (Stage) nazivId.getScene().getWindow();
+                os.close();
+                openDialog("Pregled materijala", "/fxml/materijali_main.fxml", null);
+            }
+
     }
 
     private void openDialog(String title, String file, Object controller){
