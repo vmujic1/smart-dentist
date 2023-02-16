@@ -137,7 +137,14 @@ public class RasporedManagerTest {
         Assertions.assertTrue(kontrola);
 
     }
-    
+    @Test
+
+    void jeLiDatumPrijeDanasnjegTest() throws SmartDentistException{
+        RasporedManager mockU = Mockito.mock(RasporedManager.class);
+        Mockito.when(mockU.getById(0)).thenReturn(new NarudzbePacijenata("TestnoIme","TestnoPrezime", LocalDate.of(2022,01,01),"br"));
+        Assertions.assertTrue(RasporedDodajController.jeLiDatumPrijeDanasnjeg(mockU.getById(0).getDatum()));
+
+    }
 
 
 
