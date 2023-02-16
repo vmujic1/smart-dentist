@@ -55,8 +55,8 @@ public class MaterijaliDodajController {
             alert.setContentText("Uspjesno ste dodali novu stavku u skladiste!");
             alert.showAndWait();
             Stage os = (Stage) nazivId.getScene().getWindow();
-            openDialog("Pregled materijala", "/fxml/materijali_main.fxml", null);
             os.close();
+            openDialog("Pregled materijala", "/fxml/materijali_main.fxml", null);
         }
     }
 
@@ -77,7 +77,6 @@ public class MaterijaliDodajController {
 
     public void odustaniOnClick(ActionEvent actionEvent) {
         Stage os = (Stage)kolicnaId.getScene().getWindow();
-        openDialog("Pregled materijala", "/fxml/materijali_main.fxml",null);
         os.close();
     }
 }
