@@ -60,14 +60,14 @@ public class RasporedDodajController {
             alert.setContentText("Uspjesno ste dodali novog pacijenta u raspored");
             alert.showAndWait();
             Stage os = (Stage) imeId.getScene().getWindow();
-            openDialog("Raspored", "/fxml/raspored_main.fxml", null);
             os.close();
+            openDialog("Skladiste materijala", "/fxml/raspored_main.fxml", null);
         }
     }
 
     public void odustaniOnClick(ActionEvent actionEvent) {
         Stage os = (Stage) imeId.getScene().getWindow();
-        openDialog("Raspored", "/fxml/raspored_main.fxml",null);
+
         os.close();
     }
 
