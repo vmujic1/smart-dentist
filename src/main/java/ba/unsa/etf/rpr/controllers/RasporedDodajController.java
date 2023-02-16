@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
@@ -25,14 +24,30 @@ public class RasporedDodajController {
 
     RasporedManager rasporedManager = new RasporedManager();
 
+    public static boolean jeLiDatumPrijeDanasnjeg(LocalDate datum){
+        if(datum.isBefore(LocalDate.now())) {
+            return true;
+        }
+        return false;
+
+    }
+
     public void dodajOnClick(ActionEvent actionEvent) throws SmartDentistException {
-        if(imeId.getText().isEmpty() || prezimeId.getText().isEmpty() || opisId.getText().isEmpty() || datumId.getValue().isBefore(LocalDate.now())){
+        if(imeId.getText().isEmpty() || prezimeId.getText().isEmpty() || opisId.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greska");
             alert.setHeaderText(null);
             alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
             alert.showAndWait();
-        }else {
+        }else if(jeLiDatumPrijeDanasnjeg(datumId.getValue())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska!");
+            alert.setHeaderText(null);
+            alert.setContentText("Neispravan datum.");
+            alert.showAndWait();
+
+
+        }else{
             NarudzbePacijenata nova = new NarudzbePacijenata();
             nova.setIme(imeId.getText());
             nova.setPrezime(prezimeId.getText());

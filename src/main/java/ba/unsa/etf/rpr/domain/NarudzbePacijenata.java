@@ -29,6 +29,14 @@ public class NarudzbePacijenata implements Idable {
 
     }
 
+    public NarudzbePacijenata(String ime, String prezime, LocalDate datum, String povod){
+        this.ime = ime;
+        this.prezime = prezime;
+        this.datum = datum;
+        this.povod = povod;
+
+    }
+
     public int getId() {
         return id;
     }

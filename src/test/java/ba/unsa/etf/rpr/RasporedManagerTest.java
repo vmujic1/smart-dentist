@@ -1,10 +1,12 @@
 package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.business.RasporedManager;
+import ba.unsa.etf.rpr.controllers.RasporedDodajController;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -135,6 +137,7 @@ public class RasporedManagerTest {
         Assertions.assertTrue(kontrola);
 
     }
+    
 
 
 

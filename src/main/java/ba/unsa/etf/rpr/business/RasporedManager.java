@@ -28,4 +28,8 @@ public class RasporedManager {
     public static NarudzbePacijenata getByName(String name) throws SmartDentistException{
         return DaoFactory.narudzbePacijenataDao().getByName(name);
     }
+
+    public NarudzbePacijenata getById(int i) throws SmartDentistException {
+        return DaoFactory.narudzbePacijenataDao().getById(i);
+    }
 }

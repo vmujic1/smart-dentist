@@ -11,6 +11,10 @@ import javafx.stage.StageStyle;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
+/**
+ * Controler
+ */
+
 public class HomeController {
     public Button rasporedId;
 
