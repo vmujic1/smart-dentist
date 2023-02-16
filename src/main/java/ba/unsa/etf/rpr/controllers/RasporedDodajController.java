@@ -82,6 +82,7 @@ public class RasporedDodajController {
             stage.initStyle(StageStyle.UTILITY);
             stage.setResizable(false);
             stage.show();
+            stage.getIcons().add(null);
         }catch (Exception e){
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }

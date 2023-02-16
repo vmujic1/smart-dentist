@@ -100,6 +100,7 @@ public class SignUpController {
             alert.setContentText("Your account has been created. You can now log in.");
             alert.showAndWait();
             stage.close();
+            openDialog("Prijava","/fxml/login.fxml",null);
 
         }
     }
@@ -124,5 +125,11 @@ public class SignUpController {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
 
+    }
+
+    public void odustaniOnAction(ActionEvent actionEvent) {
+        Stage s = (Stage)kontaktTelefonId.getScene().getWindow();
+        openDialog("Prijava","/fxml/login.fxml",null);
+        s.close();
     }
 }
