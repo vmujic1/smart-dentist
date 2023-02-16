@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.Dao.DaoFactory;
 import ba.unsa.etf.rpr.business.RasporedManager;
 import ba.unsa.etf.rpr.domain.NarudzbePacijenata;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
@@ -44,6 +43,8 @@ public class RasporedMainController {
     private ObservableList<NarudzbePacijenata> dnevniPacijenti = FXCollections.observableArrayList();
     private ObservableList<NarudzbePacijenata> sviPacijenti = FXCollections.observableArrayList();
 
+
+
     @FXML
     public void initialize(){
         idKolonaId.setCellValueFactory(new PropertyValueFactory<NarudzbePacijenata,Integer>("id"));
@@ -79,7 +80,8 @@ public class RasporedMainController {
         stage.setScene(new Scene(root1));
         stage.setResizable(false);
         stage.show();
-        popuniTabelu();
+        Stage s = (Stage)tabelaId.getScene().getWindow();
+        tabelaId.refresh();
 
     }
 
@@ -171,5 +173,6 @@ public class RasporedMainController {
         Stage s = (Stage)tabelaId.getScene().getWindow();
         openDialog("Skladiste","/fxml/materijali_main.fxml",null);
         s.close();
+
     }
 }
