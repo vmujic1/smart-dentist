@@ -24,6 +24,16 @@ public class MaterijaliUrediController {
 
     MaterijaliManager materijaliManager = new MaterijaliManager();
 
+    public boolean daLiJeKolicinaBroj(String s){
+        if(s.matches("[0-9]+")) return true;
+        return false;
+    }
+
+    public boolean jeLiPrvaCifraNula(String s){
+        if(s.charAt(0) == '0') return true;
+        return false;
+    }
+
     @FXML
     public void initialize() throws SmartDentistException {
         Materijali novi = new Materijali();
@@ -38,7 +48,22 @@ public class MaterijaliUrediController {
             alert.setHeaderText(null);
             alert.setContentText("Popunite sve trazene podatke, a zatim pokusajte ponovo");
             alert.showAndWait();
-        } else if(Integer.parseInt(kolicnaId.getText()) < 0){
+        } else if(!daLiJeKolicinaBroj(kolicnaId.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText(null);
+            alert.setContentText("Unijeli ste pogresnu kolicinu!");
+            alert.showAndWait();
+
+
+        } else if(jeLiPrvaCifraNula(kolicnaId.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greska");
+            alert.setHeaderText(null);
+            alert.setContentText("Unijeli ste pogresnu kolicinu!");
+            alert.showAndWait();
+
+        }else if(Integer.parseInt(kolicnaId.getText()) < 0){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Greska");
             alert.setHeaderText(null);
