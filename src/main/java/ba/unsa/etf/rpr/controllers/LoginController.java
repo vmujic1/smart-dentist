@@ -5,8 +5,6 @@ import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.SmartDentistException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -67,6 +65,9 @@ public class LoginController {
 
     public void registrujSeOnClick(ActionEvent actionEvent) throws IOException {
         openDialog("Registracija","/fxml/signup.fxml",null);
+        Stage s = (Stage)prijaviSeId.getScene().getWindow();
+
+        s.close();
 
     }
 
