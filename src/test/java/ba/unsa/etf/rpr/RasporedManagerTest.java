@@ -137,6 +137,11 @@ public class RasporedManagerTest {
         Assertions.assertTrue(kontrola);
 
     }
+
+    /**
+     * Mocking test that checks jeLiDatumPrijeDanasnjeg method from RasporedDodajController
+     * @throws SmartDentistException
+     */
     @Test
 
     void jeLiDatumPrijeDanasnjegTest() throws SmartDentistException{
